@@ -1,0 +1,54 @@
+definitions:
+  api.Good:
+    properties:
+      name:
+        description: 年龄
+        type: string
+      price:
+        type: integer
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /api/home:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: get-string-by-int
+      parameters:
+      - description: Some ID
+        in: query
+        name: some_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/api.Good'
+      summary: Add a new pet to the store
+    post:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: get-string-by-int
+      parameters:
+      - description: Add account
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/api.Good'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/api.Good'
+      summary: Add a new pet to the store
+swagger: "2.0"

@@ -1,4 +1,5 @@
 pkg
 .vscode
 log
+tmp
 __debug_bin
