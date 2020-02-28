@@ -7,39 +7,44 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetHome example
-// @Summary Add a new pet to the store
-// @Description get string by ID
-// @ID get-string-by-int
-// @Accept  json
-// @Produce  json
-// @Param   offset     query    int     true        "Offset"
-// @Success 200 {object} modle.Goods "Can not find ID"
-// @Router /api/home [get]
-func GetHome(c *gin.Context) {
-	var c1 = make(chan modle.Goods, 1)
-	var c2 = make(chan []modle.Goods, 1)
-	res := make(map[string]interface{}, 2)
-	var g modle.Goods
-	go func() {
-		goods, _ := g.NewGoods(1, 5)
-		c2 <- goods
-	}()
-	go func() {
-		good, _ := g.Search()
-		c1 <- good
-	}()
-	res["good"] = <-c1
-	res["goods"] = <-c2
-	response.ReSuccess(c, "", res)
+type homeRes struct {
+	NewGoodsList []modle.Goods   `json:"newGoodsList"` // 新品
+	Banner       []modle.Bannel  `json:"banner"`       // 轮播图
+	Channel      []modle.Channel `json:"channel"`      // 渠道
+	HotGoodsList []modle.Goods   `json:"hotGoodsList"` // 热销商品
 }
 
-// PostHome example
-// @Summary Add a new pet to the store
-// @Description get string by ID
-// @ID get-string-by-int
-// @Accept  json
-// @Produce  json
-// @Param account body Good true "Add account"
-// @Success  200 {object} Good "Can not find ID"
-// @Router /api/home [post]
+// GetHome 获取首页数据
+func GetHome(c *gin.Context) {
+	c1 := make(chan []modle.Goods, 1)
+	c2 := make(chan []modle.Bannel, 1)
+	c3 := make(chan []modle.Channel, 1)
+	c4 := make(chan []modle.Goods, 1)
+	var g modle.Goods
+	var b modle.Bannel
+	var ch modle.Channel
+	go func() {
+		v, _ := g.NewGoods(1, 5)
+		c1 <- v
+	}()
+	go func() {
+		v, _ := b.GetBannel(3)
+		c2 <- v
+	}()
+	go func() {
+		v, _ := ch.GetChannel(5)
+		c3 <- v
+	}()
+	go func() {
+		v, _ := g.HotGoods(1, 3)
+		c4 <- v
+	}()
+
+	res := &homeRes{
+		NewGoodsList: <-c1,
+		Banner:       <-c2,
+		Channel:      <-c3,
+		HotGoodsList: <-c4,
+	}
+	response.ReSuccess(c, res, "")
+}

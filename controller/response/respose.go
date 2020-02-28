@@ -25,28 +25,28 @@ const (
 )
 
 // ReSuccess 成功返回信息
-func ReSuccess(c *gin.Context, msg interface{}, a interface{}) {
+func ReSuccess(c *gin.Context, a interface{}, errmsg string) {
 	c.JSON(http.StatusOK, gin.H{
 		"errno":  SuccessCode,
-		"errmsg": msg,
+		"errmsg": errmsg,
 		"data":   a,
 	})
 }
 
 // ReFail 错误返回信息
-func ReFail(c *gin.Context, msg interface{}, a interface{}) {
+func ReFail(c *gin.Context, a interface{}, errmsg string) {
 	c.JSON(http.StatusOK, gin.H{
 		"errno":  FailCode,
-		"errmsg": msg,
+		"errmsg": errmsg,
 		"data":   a,
 	})
 }
 
 // ReFailToken 用户未登录
-func ReFailToken(c *gin.Context, msg interface{}, a interface{}) {
+func ReFailToken(c *gin.Context, a interface{}, errmsg string) {
 	c.JSON(http.StatusOK, gin.H{
 		"errno":  FailTokenCode,
-		"errmsg": msg,
+		"errmsg": errmsg,
 		"data":   a,
 	})
 }

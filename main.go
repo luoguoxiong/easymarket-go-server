@@ -27,11 +27,9 @@ func main() {
 	}
 	time.Sleep(10 * time.Microsecond)
 	fmt.Printf(`
-	欢迎使用 easymarket-go-server
-	作者：peroluo
-	github: https://github.com/Peroluo/easymarket-go-server
-	默认自动化文档地址: http://127.0.0.1%s/swagger/index.html
-	默认前端文件运行地址: http://127.0.0.1:8888
-`, s.Addr)
+欢迎使用 easymarket-go-server
+作者:peroluo
+github:https://github.com/Peroluo/easymarket-go-server
+`)
 	_ = s.ListenAndServe()
 }

@@ -11,7 +11,7 @@ func Token() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("token")
 		if token == "" {
-			response.ReFailToken(c, "请选登录！", nil)
+			response.ReFailToken(c, nil, "请选登录！")
 			c.Abort()
 		} else {
 			c.Next()

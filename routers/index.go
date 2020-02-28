@@ -11,7 +11,7 @@ import (
 func DetaultRouter(Router *gin.RouterGroup) {
 	v1 := Router.Group("/api")
 	{
-		v1.GET("/home", api.GetHome)
+		v1.GET("/", api.GetHome)
 	}
 }
 
@@ -19,7 +19,7 @@ func DetaultRouter(Router *gin.RouterGroup) {
 func TokenRouter(Router *gin.RouterGroup) {
 	v2 := Router.Group("/api", middleware.Token())
 	{
-		v2.GET("/", api.GetHome)
+		v2.GET("/login", api.GetHome)
 	}
 }
 
