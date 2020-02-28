@@ -2,6 +2,7 @@ package main
 
 import (
 	"easymarket/inits"
+	"easymarket/inits/mysqlinit"
 	"easymarket/utils"
 	"fmt"
 	"net/http"
@@ -9,9 +10,13 @@ import (
 )
 
 func main() {
-	Router := inits.InitRouter() // 初始化路由
-	inits.InitDb()               // 初始化数据库连接
-	utils.InitLog()              // 初始化日志
+	Router := inits.InitRouter()  // 初始化路由
+	db, err := mysqlinit.InitDb() // 初始化数据库连接
+	defer db.Close()
+	if err != nil {
+
+	}
+	utils.InitLog() // 初始化日志
 	utils.QMLog.Info("服务器开启")
 	s := &http.Server{
 		Addr:           ":8888",

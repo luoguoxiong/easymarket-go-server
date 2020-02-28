@@ -1,11 +1,12 @@
 definitions:
-  api.Good:
+  modle.Goods:
     properties:
-      name:
-        description: 年龄
-        type: string
-      price:
+      id:
+        description: 商品id
         type: integer
+      name:
+        description: 商品名称
+        type: string
     type: object
 info:
   contact: {}
@@ -18,9 +19,9 @@ paths:
       description: get string by ID
       operationId: get-string-by-int
       parameters:
-      - description: Some ID
+      - description: Offset
         in: query
-        name: some_id
+        name: offset
         required: true
         type: integer
       produces:
@@ -29,26 +30,6 @@ paths:
         "200":
           description: Can not find ID
           schema:
-            $ref: '#/definitions/api.Good'
-      summary: Add a new pet to the store
-    post:
-      consumes:
-      - application/json
-      description: get string by ID
-      operationId: get-string-by-int
-      parameters:
-      - description: Add account
-        in: body
-        name: account
-        required: true
-        schema:
-          $ref: '#/definitions/api.Good'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Can not find ID
-          schema:
-            $ref: '#/definitions/api.Good'
+            $ref: '#/definitions/modle.Goods'
       summary: Add a new pet to the store
 swagger: "2.0"

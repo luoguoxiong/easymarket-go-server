@@ -19,8 +19,8 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Some ID",
-                        "name": "some_id",
+                        "description": "Offset",
+                        "name": "offset",
                         "in": "query",
                         "required": true
                     }
@@ -29,37 +29,7 @@
                     "200": {
                         "description": "Can not find ID",
                         "schema": {
-                            "$ref": "#/definitions/api.Good"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "get string by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "Add a new pet to the store",
-                "operationId": "get-string-by-int",
-                "parameters": [
-                    {
-                        "description": "Add account",
-                        "name": "account",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.Good"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Can not find ID",
-                        "schema": {
-                            "$ref": "#/definitions/api.Good"
+                            "$ref": "#/definitions/modle.Goods"
                         }
                     }
                 }
@@ -67,15 +37,16 @@
         }
     },
     "definitions": {
-        "api.Good": {
+        "modle.Goods": {
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "年龄",
-                    "type": "string"
-                },
-                "price": {
+                "id": {
+                    "description": "商品id",
                     "type": "integer"
+                },
+                "name": {
+                    "description": "商品名称",
+                    "type": "string"
                 }
             }
         }
