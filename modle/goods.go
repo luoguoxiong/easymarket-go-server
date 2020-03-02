@@ -2,6 +2,7 @@ package modle
 
 import (
 	"easymarket/inits/mysqlinit"
+	"strings"
 )
 
 // Goods 商品model
@@ -29,7 +30,21 @@ func (g *Goods) NewGoods(page int, size int) (goods []Goods, err error) {
 
 // HotGoods 热门商品
 func (g *Goods) HotGoods(page int, size int) (goods []Goods, err error) {
-	sqlStr := "select id, name, list_pic_url, retail_price,goods_brief from nideshop_goods where is_hot=1  limit ?,?"
+	sqlStr := "select id, name, list_pic_url, retail_price, goods_brief from nideshop_goods where is_hot=1  limit ?,?"
 	err = mysqlinit.DB.Select(&goods, sqlStr, (page-1)*size, size)
+	return
+}
+
+// GetTypeGoods 获取某一大类的商品
+func (g *Goods) GetTypeGoods(categoryIds []interface{}, page int, size int) (goods []Goods, err error) {
+	categoryLen := len(categoryIds)
+	ps := make([]string, categoryLen)
+	for i := 0; i < categoryLen; i++ {
+		ps[i] = "?"
+	}
+	str := strings.Join(ps, ",")
+	sqlStr := `select id, name, list_pic_url, retail_price FROM nideshop_goods WHERE category_id IN (` + str + `)  LIMIT ?,?`
+	parmas := append(categoryIds, (page-1)*size, size)
+	err = mysqlinit.DB.Select(&goods, sqlStr, parmas...)
 	return
 }
