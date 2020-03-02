@@ -12,6 +12,7 @@ func DetaultRouter(Router *gin.RouterGroup) {
 	v1 := Router.Group("/api")
 	{
 		v1.GET("/", api.GetHome)
+		v1.GET("/topic/list", api.GetTopicList)
 	}
 }
 

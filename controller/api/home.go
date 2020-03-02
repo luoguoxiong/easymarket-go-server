@@ -32,7 +32,7 @@ func GetHome(c *gin.Context) {
 	c4 := make(chan []modle.Goods, 1)
 	c5 := make(chan []modle.Brand, 1)
 	c6 := make(chan []modle.Topic, 1)
-	c7 := make(chan []categoryList, 7)
+	c7 := make(chan []categoryList, 1)
 	var g modle.Goods
 	var b modle.Bannel
 	var br modle.Brand
@@ -55,6 +55,13 @@ func GetHome(c *gin.Context) {
 		TopicList:    <-c6,
 		CategoryList: <-c7,
 	}
+	close(c1)
+	close(c2)
+	close(c3)
+	close(c4)
+	close(c5)
+	close(c6)
+	close(c7)
 	response.ReSuccess(c, res, "")
 }
 
@@ -97,13 +104,15 @@ func getTopics(t modle.Topic, c chan<- []modle.Topic) {
 // 获取分类推荐商品
 func getCategoryGoods(ca modle.Category, ch chan<- []categoryList) {
 	c, _ := ca.GetAllCategory(0)
-	categoryLists := make([]categoryList, len(c))
+	le := len(c)
+	categoryLists := make([]categoryList, le, le)
 	var wg sync.WaitGroup
-	wg.Add(len(c))
+	wg.Add(le)
 	for key, v := range c {
 		go func(index int, v modle.Category) {
 			c2, _ := ca.GetAllCategory(v.ID)
-			ids := []interface{}{}
+			c2Len := len(c2)
+			ids := make([]interface{}, c2Len, c2Len)
 			for _, v1 := range c2 {
 				ids = append(ids, v1.ID)
 			}
