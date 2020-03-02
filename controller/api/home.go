@@ -3,6 +3,7 @@ package api
 import (
 	"easymarket/controller/response"
 	"easymarket/modle"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 )
@@ -95,17 +96,23 @@ func getTopics(t modle.Topic, c chan<- []modle.Topic) {
 
 // 获取分类推荐商品
 func getCategoryGoods(ca modle.Category, ch chan<- []categoryList) {
-	categoryLists := []categoryList{}
 	c, _ := ca.GetAllCategory(0)
-	for _, v := range c {
-		c2, _ := ca.GetAllCategory(v.ID)
-		ids := []interface{}{}
-		for _, v1 := range c2 {
-			ids = append(ids, v1.ID)
-		}
-		var g modle.Goods
-		gs, _ := g.GetTypeGoods(ids, 1, 7)
-		categoryLists = append(categoryLists, categoryList{v.ID, v.Name, gs})
+	categoryLists := make([]categoryList, len(c))
+	var wg sync.WaitGroup
+	wg.Add(len(c))
+	for key, v := range c {
+		go func(index int, v modle.Category) {
+			c2, _ := ca.GetAllCategory(v.ID)
+			ids := []interface{}{}
+			for _, v1 := range c2 {
+				ids = append(ids, v1.ID)
+			}
+			var g modle.Goods
+			gs, _ := g.GetTypeGoods(ids, 1, 7)
+			categoryLists[index] = categoryList{v.ID, v.Name, gs}
+			wg.Done()
+		}(key, v)
 	}
+	wg.Wait()
 	ch <- categoryLists
 }
