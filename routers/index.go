@@ -13,6 +13,7 @@ func DetaultRouter(Router *gin.RouterGroup) {
 	{
 		v1.GET("/", api.GetHome)
 		v1.GET("/topic/list", api.GetTopicList)
+		v1.GET("/topic/detail", api.GetTopicDetail)
 	}
 }
 

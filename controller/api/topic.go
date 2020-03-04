@@ -34,3 +34,11 @@ func GetTopicList(c *gin.Context) {
 	wg.Wait()
 	response.ReSuccess(c, t, "")
 }
+
+// GetTopicDetail 获取专题详情
+func GetTopicDetail(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Query("id"))
+	var t modle.Topic
+	tdesc, _ := t.GetTopicDetail(id)
+	response.ReSuccess(c, tdesc, "")
+}
