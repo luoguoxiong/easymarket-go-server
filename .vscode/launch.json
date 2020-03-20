@@ -5,18 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch",
+      "name": "appServer",
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "port": 8888,
+      "remotePath": "",
+      "port": 8000,
       "host": "127.0.0.1",
-      "program": "D:\\gitHub\\easymarket-go-serve\\main.go",
-      "env": {
-        "GOPATH": "D:\\mygo",
-        "GOROOT": "D:\\go"
-      },
-      "args": []
+      "program": "${workspaceRoot}/app/cmd/main.go",
+      "args": ["-conf", "../configs"]
+    },
+    {
+      "name": "goodsServer",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "remotePath": "",
+      "port": 18001,
+      "host": "127.0.0.1",
+      "program": "${workspaceRoot}/common/goods/cmd/main.go",
+      "args": ["-conf", "../configs"]
     }
   ]
 }
