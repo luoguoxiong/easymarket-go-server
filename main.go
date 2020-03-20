@@ -19,7 +19,7 @@ func main() {
 	utils.InitLog() // 初始化日志
 	utils.QMLog.Info("服务器开启")
 	s := &http.Server{
-		Addr:           ":8888",
+		Addr:           ":8887",
 		Handler:        Router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,

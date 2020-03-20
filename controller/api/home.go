@@ -101,7 +101,7 @@ func getTopics(t modle.Topic, c chan<- []modle.Topic) {
 	c <- v
 }
 
-// 获取分类推荐商品2
+// 获取分类推荐商品
 func getCategoryGoods(ca modle.Category, ch chan<- []categoryList) {
 	c, _ := ca.GetAllCategory(0)
 	le := len(c)
