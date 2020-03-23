@@ -1,0 +1,6 @@
+[goodsDB]
+    dsn = "root:root@tcp(192.168.100.45:3306)/user?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+    debug = true
+	maxOpenConns = 20
+	maxIdleConns = 10
+	connMaxLifeTime ="4h"

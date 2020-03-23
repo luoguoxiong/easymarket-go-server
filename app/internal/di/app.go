@@ -13,14 +13,14 @@ import (
 
 //go:generate kratos tool wire
 type App struct {
-	svc *service.Service
+	svc  *service.Service
 	http *bm.Engine
 	grpc *warden.Server
 }
 
-func NewApp(svc *service.Service, h *bm.Engine, g *warden.Server) (app *App, closeFunc func(), err error){
+func NewApp(svc *service.Service, h *bm.Engine, g *warden.Server) (app *App, closeFunc func(), err error) {
 	app = &App{
-		svc: svc,
+		svc:  svc,
 		http: h,
 		grpc: g,
 	}

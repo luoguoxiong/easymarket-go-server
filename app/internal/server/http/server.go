@@ -5,6 +5,7 @@ import (
 
 	pb "easymarketgoserve/app/api"
 	"easymarketgoserve/app/internal/model"
+
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 	"github.com/bilibili/kratos/pkg/log"
 	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
@@ -16,7 +17,7 @@ var svc pb.DemoServer
 func New(s pb.DemoServer) (engine *bm.Engine, err error) {
 	var (
 		cfg bm.ServerConfig
-		ct paladin.TOML
+		ct  paladin.TOML
 	)
 	if err = paladin.Get("http.toml").Unmarshal(&ct); err != nil {
 		return

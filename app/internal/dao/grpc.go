@@ -25,7 +25,7 @@ type ServerConfig struct {
 }
 
 // NewGrpcClient 实例化Grpc
-func NewGrpcClient() goods.DemoClient {
+func NewGrpcClient() goods.GoodsClient {
 	var (
 		service struct {
 			Servers map[string]*ServerConfig
@@ -48,5 +48,5 @@ func NewGrpcClient() goods.DemoClient {
 	if err != nil {
 		panic(err)
 	}
-	return goods.NewDemoClient(cc)
+	return goods.NewGoodsClient(cc)
 }
