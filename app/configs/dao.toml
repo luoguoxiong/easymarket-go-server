@@ -1,0 +1,4 @@
+[servers]
+    [servers.goods-service]
+    timeout = "600000ms"
+    addr = "127.0.0.1:28001"

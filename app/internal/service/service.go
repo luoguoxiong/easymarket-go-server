@@ -6,6 +6,7 @@ import (
 
 	pb "easymarketgoserve/app/api"
 	"easymarketgoserve/app/internal/dao"
+
 	"github.com/bilibili/kratos/pkg/conf/paladin"
 
 	"github.com/golang/protobuf/ptypes/empty"
@@ -34,6 +35,7 @@ func New(d dao.Dao) (s *Service, cf func(), err error) {
 // SayHello grpc demo func.
 func (s *Service) SayHello(ctx context.Context, req *pb.HelloReq) (reply *empty.Empty, err error) {
 	reply = new(empty.Empty)
+	_ = s.dao.Ping2(ctx)
 	fmt.Printf("hello %s", req.Name)
 	return
 }
@@ -43,6 +45,7 @@ func (s *Service) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.
 	reply = &pb.HelloResp{
 		Content: "hello " + req.Name,
 	}
+	_ = s.dao.Ping2(ctx)
 	fmt.Printf("hello url %s", req.Name)
 	return
 }
