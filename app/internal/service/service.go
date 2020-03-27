@@ -35,7 +35,7 @@ func New(d *dao.Dao) (s *Service, cf func(), err error) {
 // SayHello grpc demo func.
 func (s *Service) SayHello(ctx context.Context, req *pb.HelloReq) (reply *empty.Empty, err error) {
 	reply = new(empty.Empty)
-	res, _ := s.dao.Ping2(ctx)
+	res, _ := s.dao.GetGoodsDetail(ctx)
 	fmt.Printf("hello %s", req.Name)
 	fmt.Println(res)
 	return
@@ -44,7 +44,7 @@ func (s *Service) SayHello(ctx context.Context, req *pb.HelloReq) (reply *empty.
 // SayHelloURL bm demo func.
 func (s *Service) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.HelloResp, err error) {
 
-	res, _ := s.dao.Ping2(ctx)
+	res, _ := s.dao.GetGoodsDetail(ctx)
 	fmt.Println(res)
 	reply = &pb.HelloResp{
 		Content: "hello " + req.Name,
@@ -54,7 +54,7 @@ func (s *Service) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.
 
 // Ping ping the resource.
 func (s *Service) Ping(ctx context.Context, e *empty.Empty) (*empty.Empty, error) {
-	return &empty.Empty{}, s.dao.Ping(ctx)
+	return &empty.Empty{}, nil
 }
 
 // Close close the resource.

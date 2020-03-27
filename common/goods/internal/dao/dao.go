@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/bilibili/kratos/pkg/conf/paladin"
@@ -11,6 +10,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Provider ...
 var Provider = wire.NewSet(New, NewDB)
 
 // Dao dao.
@@ -40,11 +40,4 @@ func New(db *gorm.DB) (d *Dao, cf func(), err error) {
 // Close close the resource.
 func (d *Dao) Close() {
 	d.cache.Close()
-}
-
-// GetGoods ...
-func (d *Dao) GetGoods() {
-	var count int32
-	d.db.Table("nideshop_goods").Count(&count)
-	fmt.Println(count)
 }

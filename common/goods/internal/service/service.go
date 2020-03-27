@@ -1,9 +1,6 @@
 package service
 
 import (
-	"context"
-	"fmt"
-
 	pb "easymarketgoserve/common/goods/api"
 	"easymarketgoserve/common/goods/internal/dao"
 
@@ -30,18 +27,4 @@ func New(d *dao.Dao) (s *Service, cf func(), err error) {
 	cf = func() {}
 	err = paladin.Watch("application.toml", s.ac)
 	return
-}
-
-// GetGoods grpc demo func.
-func (s *Service) GetGoods(ctx context.Context, req *pb.GoodsReq) (res *pb.GoodsRes, err error) {
-	fmt.Println(req)
-	s.dao.GetGoods()
-	res = &pb.GoodsRes{
-		Id:          1,
-		Name:        "23",
-		RetailPrice: 1,
-		GoodsBrief:  "23",
-		ListPicUrl:  "233",
-	}
-	return res, nil
 }

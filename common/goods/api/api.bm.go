@@ -15,26 +15,39 @@ var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
-var PathGoodsGetGoods = "/goods/getList"
+var PathGoodsGetGoodsDetail = "/goods/getGoodsDetail"
+var PathGoodsGetGoodsList = "/goods/getGoodsList"
 
 // GoodsBMServer is the server API for Goods service.
 type GoodsBMServer interface {
-	GetGoods(ctx context.Context, req *GoodsReq) (resp *GoodsRes, err error)
+	GetGoodsDetail(ctx context.Context, req *GoodsReq) (resp *GoodsRes, err error)
+
+	GetGoodsList(ctx context.Context, req *GoodsReq) (resp *GoodsListRes, err error)
 }
 
 var GoodsSvc GoodsBMServer
 
-func goodsGetGoods(c *bm.Context) {
+func goodsGetGoodsDetail(c *bm.Context) {
 	p := new(GoodsReq)
 	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
 		return
 	}
-	resp, err := GoodsSvc.GetGoods(c, p)
+	resp, err := GoodsSvc.GetGoodsDetail(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetGoodsList(c *bm.Context) {
+	p := new(GoodsReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsList(c, p)
 	c.JSON(resp, err)
 }
 
 // RegisterGoodsBMServer Register the blademaster route
 func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	GoodsSvc = server
-	e.GET("/goods/getList", goodsGetGoods)
+	e.GET("/goods/getGoodsDetail", goodsGetGoodsDetail)
+	e.GET("/goods/getGoodsList", goodsGetGoodsList)
 }

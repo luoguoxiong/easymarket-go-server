@@ -16,9 +16,9 @@
         "application/json"
     ],
     "paths": {
-        "/goods/getList": {
+        "/goods/getGoodsDetail": {
             "get": {
-                "summary": "/goods/getList",
+                "summary": "/goods/getGoodsDetail",
                 "responses": {
                     "200": {
                         "description": "A successful response.",
@@ -62,9 +62,70 @@
                     "goods.service.v1.Goods"
                 ]
             }
+        },
+        "/goods/getGoodsList": {
+            "get": {
+                "summary": "/goods/getGoodsList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "isHot",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
         }
     },
     "definitions": {
+        ".goods.service.v1.GoodsListRes": {
+            "type": "object",
+            "properties": {
+                "goodsList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsRes"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
         ".goods.service.v1.GoodsReq": {
             "type": "object",
             "properties": {
@@ -89,7 +150,8 @@
                     "type": "string"
                 },
                 "retail_price": {
-                    "type": "integer"
+                    "type": "number",
+                    "format": "double"
                 },
                 "goods_brief": {
                     "type": "string"

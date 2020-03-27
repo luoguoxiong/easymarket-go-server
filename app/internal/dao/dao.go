@@ -51,14 +51,9 @@ func (d *Dao) Close() {
 	d.cache.Close()
 }
 
-// Ping ping the resource.
-func (d *Dao) Ping(ctx context.Context) (err error) {
-	return nil
-}
-
-// Ping2 Ping2
-func (d *Dao) Ping2(ctx context.Context) (res *goods.GoodsRes, err error) {
-	res, _ = d.goodsGrpc.GetGoods(ctx, &goods.GoodsReq{
+// GetGoodsDetail Ping2
+func (d *Dao) GetGoodsDetail(ctx context.Context) (res *goods.GoodsListRes, err error) {
+	res, _ = d.goodsGrpc.GetGoodsList(ctx, &goods.GoodsReq{
 		IsHot: 1,
 		Page:  1,
 		Size_: 1,
