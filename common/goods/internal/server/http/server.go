@@ -31,15 +31,10 @@ func New(s pb.GoodsServer) (engine *bm.Engine, err error) {
 }
 
 func initRouter(e *bm.Engine) {
-	e.Ping(ping)
 	g := e.Group("/goods")
 	{
 		g.GET("/start", howToStart)
 	}
-}
-
-func ping(ctx *bm.Context) {
-
 }
 
 // example for http request handler.

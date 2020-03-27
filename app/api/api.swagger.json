@@ -1,0 +1,118 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "easymarketgoserve/app/api/api.proto",
+        "version": "1"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/app/getGoodsList": {
+            "get": {
+                "summary": "/app/getGoodsList",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "isHot",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".goods.service.v1.GoodsListRes": {
+            "type": "object",
+            "properties": {
+                "goodsList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsRes"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        ".goods.service.v1.GoodsReq": {
+            "type": "object",
+            "properties": {
+                "isHot": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "size": {
+                    "type": "integer"
+                }
+            }
+        },
+        ".goods.service.v1.GoodsRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "retail_price": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "goods_brief": {
+                    "type": "string"
+                },
+                "list_pic_url": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

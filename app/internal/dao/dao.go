@@ -52,11 +52,7 @@ func (d *Dao) Close() {
 }
 
 // GetGoodsDetail Ping2
-func (d *Dao) GetGoodsDetail(ctx context.Context) (res *goods.GoodsListRes, err error) {
-	res, _ = d.goodsGrpc.GetGoodsList(ctx, &goods.GoodsReq{
-		IsHot: 1,
-		Page:  1,
-		Size_: 1,
-	})
+func (d *Dao) GetGoodsDetail(ctx context.Context, req *goods.GoodsReq) (res *goods.GoodsListRes, err error) {
+	res, _ = d.goodsGrpc.GetGoodsList(ctx, req)
 	return
 }
