@@ -3,9 +3,9 @@ package dao
 import (
 	"time"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	"github.com/bilibili/kratos/pkg/sync/pipeline/fanout"
-	xtime "github.com/bilibili/kratos/pkg/time"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/sync/pipeline/fanout"
+	xtime "github.com/go-kratos/kratos/pkg/time"
 	"github.com/google/wire"
 	"github.com/jinzhu/gorm"
 )

@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	pb "easymarketgoserve/common/goods/api"
+	pb "easymarket-go-server/common/goods/api"
 )
 
 // GetGoodsDetail 获取商品详情

@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"easymarketgoserve/app/internal/service"
+	"easymarket-go-server/app/internal/service"
 
-	"github.com/bilibili/kratos/pkg/log"
-	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/go-kratos/kratos/pkg/log"
+	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
+	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 )
 
 //go:generate kratos tool wire
@@ -18,6 +18,7 @@ type App struct {
 	grpc *warden.Server
 }
 
+// NewApp ...
 func NewApp(svc *service.Service, h *bm.Engine, g *warden.Server) (app *App, closeFunc func(), err error) {
 	app = &App{
 		svc:  svc,

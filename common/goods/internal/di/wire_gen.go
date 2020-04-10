@@ -6,10 +6,10 @@
 package di
 
 import (
-	"easymarketgoserve/common/goods/internal/dao"
-	"easymarketgoserve/common/goods/internal/server/grpc"
-	"easymarketgoserve/common/goods/internal/server/http"
-	"easymarketgoserve/common/goods/internal/service"
+	"easymarket-go-server/common/goods/internal/dao"
+	"easymarket-go-server/common/goods/internal/server/grpc"
+	"easymarket-go-server/common/goods/internal/server/http"
+	"easymarket-go-server/common/goods/internal/service"
 )
 
 // Injectors from wire.go:

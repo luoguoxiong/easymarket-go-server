@@ -1,11 +1,11 @@
 package http
 
 import (
-	pb "easymarketgoserve/app/api"
-	"easymarketgoserve/app/internal/model"
+	pb "easymarket-go-server/app/api"
+	"easymarket-go-server/app/internal/model"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 )
 
 var svc pb.AppServer

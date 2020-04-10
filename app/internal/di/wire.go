@@ -4,10 +4,10 @@
 package di
 
 import (
-	"easymarketgoserve/app/internal/dao"
-	"easymarketgoserve/app/internal/server/grpc"
-	"easymarketgoserve/app/internal/server/http"
-	"easymarketgoserve/app/internal/service"
+	"easymarket-go-server/app/internal/dao"
+	"easymarket-go-serverver/app/internal/server/grpc"
+	"easymarket-go-serverver/app/internal/server/http"
+	"easymarket-go-serverver/app/internal/service"
 
 	"github.com/google/wire"
 )

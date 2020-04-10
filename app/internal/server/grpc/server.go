@@ -1,10 +1,10 @@
 package grpc
 
 import (
-	pb "easymarketgoserve/app/api"
+	pb "easymarket-go-server/app/api"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 )
 
 // New new a grpc server.

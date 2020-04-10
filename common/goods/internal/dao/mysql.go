@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	_ "github.com/go-sql-driver/mysql" // init
 	"github.com/jinzhu/gorm"
 )

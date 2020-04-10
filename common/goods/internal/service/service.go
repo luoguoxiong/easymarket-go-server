@@ -1,10 +1,10 @@
 package service
 
 import (
-	pb "easymarketgoserve/common/goods/api"
-	"easymarketgoserve/common/goods/internal/dao"
+	pb "easymarket-go-server/common/goods/api"
+	"easymarket-go-server/common/goods/internal/dao"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 
 	"github.com/google/wire"
 )

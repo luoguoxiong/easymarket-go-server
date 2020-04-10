@@ -1,11 +1,11 @@
 package http
 
 import (
-	pb "easymarketgoserve/common/goods/api"
-	"easymarketgoserve/common/goods/internal/model"
+	pb "easymarket-go-server/common/goods/api"
+	"easymarket-go-server/common/goods/internal/model"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	bm "github.com/bilibili/kratos/pkg/net/http/blademaster"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 )
 
 var svc pb.GoodsServer

@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	"github.com/bilibili/kratos/pkg/database/sql"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/database/sql"
 )
 
 // NewDB ...

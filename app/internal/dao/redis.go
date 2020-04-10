@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/bilibili/kratos/pkg/cache/redis"
-	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/cache/redis"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 )
 
 // NewRedis ...

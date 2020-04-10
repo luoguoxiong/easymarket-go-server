@@ -7,9 +7,10 @@ import (
 	"syscall"
 	"time"
 
-	"easymarketgoserve/app/internal/di"
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	"github.com/bilibili/kratos/pkg/log"
+	"easymarket-go-server/app/internal/di"
+
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/log"
 )
 
 func main() {

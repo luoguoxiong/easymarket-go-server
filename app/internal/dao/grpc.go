@@ -1,13 +1,13 @@
 package dao
 
 import (
-	goods "easymarketgoserve/common/goods/api"
+	goods "easymarket-go-server/common/goods/api"
 
 	"context"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
-	"github.com/bilibili/kratos/pkg/net/rpc/warden"
-	xtime "github.com/bilibili/kratos/pkg/time"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
+	xtime "github.com/go-kratos/kratos/pkg/time"
 )
 
 // GRPCConf config for client

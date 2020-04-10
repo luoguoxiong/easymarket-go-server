@@ -3,14 +3,14 @@ package service
 import (
 	"context"
 
-	pb "easymarketgoserve/app/api"
-	"easymarketgoserve/app/internal/dao"
+	pb "easymarket-go-server/app/api"
+	"easymarket-go-server/app/internal/dao"
 
-	"github.com/bilibili/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
 
 	"github.com/google/wire"
 
-	goods_service_v1 "easymarketgoserve/common/goods/api"
+	goods_service_v1 "easymarket-go-server/common/goods/api"
 )
 
 // Provider ...

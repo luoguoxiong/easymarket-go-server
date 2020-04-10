@@ -6,4 +6,4 @@
 
 <!--  -->
 
-kratos tool protoc easymarketgoserve/common/goods/api/api.proto
+kratos tool protoc easymarket-go-server/common/goods/api/api.proto

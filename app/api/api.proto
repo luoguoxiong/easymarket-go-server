@@ -3,7 +3,7 @@ syntax = "proto3";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
-import "easymarketgoserve/common/goods/api/api.proto"; 
+import "easymarket-go-server/common/goods/api/api.proto"; 
 
 package app.service.v1;
 
