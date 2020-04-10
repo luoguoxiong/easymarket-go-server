@@ -12,9 +12,16 @@ option go_package = "api";
 option (gogoproto.goproto_getters_all) = false;
 
 service App {
-  rpc GetGoodsList(goods.service.v1.GoodsReq) returns (goods.service.v1.GoodsListRes) {
+  // 获取商品列表
+  rpc GetGoodsList(.goods.service.v1.GoodsReq) returns (.goods.service.v1.GoodsListRes) {
     option (google.api.http) = {
       get: "/app/getGoodsList"
+    };
+  };
+  // 获取商品详情
+  rpc GetGoodsDetail(.goods.service.v1.GoodsDetailReq) returns (.goods.service.v1.GoodsRes) {
+    option (google.api.http) = {
+      get: "/app/getGoodsDetail"
     };
   };
 }

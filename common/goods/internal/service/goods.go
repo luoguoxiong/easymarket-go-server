@@ -5,17 +5,14 @@ import (
 	pb "easymarketgoserve/common/goods/api"
 )
 
-// GetGoodsDetail 获取商品列表
-func (s *Service) GetGoodsDetail(ctx context.Context, req *pb.GoodsReq) (res *pb.GoodsRes, err error) {
-	return res, nil
+// GetGoodsDetail 获取商品详情
+func (s *Service) GetGoodsDetail(ctx context.Context, req *pb.GoodsDetailReq) (res *pb.GoodsRes, err error) {
+	res, err = s.dao.GetGoodsDetail(req.Id)
+	return
 }
 
 // GetGoodsList 获取商品列表
 func (s *Service) GetGoodsList(ctx context.Context, req *pb.GoodsReq) (res *pb.GoodsListRes, err error) {
-	goods, count := s.dao.GetGoodsList(req.IsHot, req.Page, req.Size_)
-	res = &pb.GoodsListRes{
-		Total:     count,
-		GoodsList: goods,
-	}
-	return res, nil
+	res, err = s.dao.GetGoodsList(req.IsHot, req.Page, req.Size_)
+	return
 }

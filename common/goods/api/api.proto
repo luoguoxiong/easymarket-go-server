@@ -5,19 +5,20 @@ syntax = "proto3";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
-
 package goods.service.v1;
 
-
 option go_package = "api";
+
 option (gogoproto.goproto_getters_all) = false;
 
 service Goods {
-  rpc GetGoodsDetail(GoodsReq) returns (GoodsRes){
+  // 获取商品详情
+  rpc GetGoodsDetail(GoodsDetailReq) returns (GoodsRes){
     option (google.api.http) = {
       get: "/goods/getGoodsDetail"
     };
   }
+  // 获取商品列表
   rpc GetGoodsList(GoodsReq) returns (GoodsListRes){
     option (google.api.http) = {
       get: "/goods/getGoodsList"
@@ -25,21 +26,40 @@ service Goods {
   }
 }
 
+// 商品详情Req
+message GoodsDetailReq {
+  // 商品id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+}
+
+// 商品列表Req
 message GoodsReq {
+  // 是否是热销 1:是、0:否
   int32 isHot =1 [(gogoproto.moretags) = 'form:"isHot"'];
+  // 页数
   int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  // 每页数量
   int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
 }
 
+// 商品列表Res
 message GoodsListRes{
+  // 商品列表
   repeated GoodsRes goodsList = 1 [(gogoproto.moretags)='form:"goodsList"'];
+  // 商品总数
   int32 total = 2 [(gogoproto.moretags)='form:"total"'];
 }
 
+// 商品详情Res
 message GoodsRes{
+  // 商品id
   int32 id = 1;
+  // 商品名称
   string name = 2;
+  // 零食价格
   double retail_price = 3;
+  // 商品简介
   string goods_brief = 4;
+  // 商品图片
   string list_pic_url = 5;
 }

@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "api.proto",
+        "title": "easymarketgoserve/common/goods/api/api.proto",
         "version": "1"
     },
     "schemes": [
@@ -18,7 +18,7 @@
     "paths": {
         "/goods/getGoodsDetail": {
             "get": {
-                "summary": "/goods/getGoodsDetail",
+                "summary": "获取商品详情",
                 "responses": {
                     "200": {
                         "description": "A successful response.",
@@ -40,19 +40,8 @@
                 },
                 "parameters": [
                     {
-                        "name": "isHot",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "size",
+                        "name": "id",
+                        "description": "商品id",
                         "in": "query",
                         "required": false,
                         "type": "integer"
@@ -65,7 +54,7 @@
         },
         "/goods/getGoodsList": {
             "get": {
-                "summary": "/goods/getGoodsList",
+                "summary": "获取商品列表",
                 "responses": {
                     "200": {
                         "description": "A successful response.",
@@ -88,18 +77,21 @@
                 "parameters": [
                     {
                         "name": "isHot",
+                        "description": "是否是热销 1:是、0:否",
                         "in": "query",
                         "required": false,
                         "type": "integer"
                     },
                     {
                         "name": "page",
+                        "description": "页数",
                         "in": "query",
                         "required": false,
                         "type": "integer"
                     },
                     {
                         "name": "size",
+                        "description": "每页数量",
                         "in": "query",
                         "required": false,
                         "type": "integer"
@@ -112,6 +104,16 @@
         }
     },
     "definitions": {
+        ".goods.service.v1.GoodsDetailReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "商品id"
+                }
+            },
+            "description": "商品详情Req"
+        },
         ".goods.service.v1.GoodsListRes": {
             "type": "object",
             "properties": {
@@ -119,47 +121,60 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/.goods.service.v1.GoodsRes"
-                    }
+                    },
+                    "description": "商品列表"
                 },
                 "total": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "商品总数"
                 }
-            }
+            },
+            "description": "商品列表Res"
         },
         ".goods.service.v1.GoodsReq": {
             "type": "object",
             "properties": {
                 "isHot": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "是否是热销 1:是、0:否"
                 },
                 "page": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "页数"
                 },
                 "size": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "每页数量"
                 }
-            }
+            },
+            "description": "商品列表Req"
         },
         ".goods.service.v1.GoodsRes": {
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "商品id"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "商品名称"
                 },
                 "retail_price": {
                     "type": "number",
-                    "format": "double"
+                    "format": "double",
+                    "description": "零食价格"
                 },
                 "goods_brief": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "商品简介"
                 },
                 "list_pic_url": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "商品图片"
                 }
-            }
+            },
+            "description": "商品详情Res"
         }
     }
 }

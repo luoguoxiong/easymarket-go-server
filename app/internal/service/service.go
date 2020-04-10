@@ -35,6 +35,12 @@ func New(d *dao.Dao) (s *Service, cf func(), err error) {
 
 //GetGoodsList ...
 func (s *Service) GetGoodsList(ctx context.Context, req *goods_service_v1.GoodsReq) (res *goods_service_v1.GoodsListRes, err error) {
+	res, err = s.dao.GetGoodsList(ctx, req)
+	return
+}
+
+//GetGoodsDetail ...
+func (s *Service) GetGoodsDetail(ctx context.Context, req *goods_service_v1.GoodsDetailReq) (res *goods_service_v1.GoodsRes, err error) {
 	res, err = s.dao.GetGoodsDetail(ctx, req)
 	return
 }

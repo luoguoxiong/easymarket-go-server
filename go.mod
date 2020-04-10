@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/bilibili/kratos v0.3.3
+	github.com/go-kratos/kratos v0.4.2
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gobuffalo/envy v1.9.0 // indirect
 	github.com/gobuffalo/packr/v2 v2.8.0 // indirect
