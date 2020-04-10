@@ -11,6 +11,7 @@ import (
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 )
 
+//App ...
 //go:generate kratos tool wire
 type App struct {
 	svc  *service.Service

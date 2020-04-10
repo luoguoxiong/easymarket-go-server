@@ -5,14 +5,14 @@ package di
 
 import (
 	"easymarket-go-server/app/internal/dao"
-	"easymarket-go-serverver/app/internal/server/grpc"
-	"easymarket-go-serverver/app/internal/server/http"
-	"easymarket-go-serverver/app/internal/service"
+	"easymarket-go-server/app/internal/server/grpc"
+	"easymarket-go-server/app/internal/server/http"
+	"easymarket-go-server/app/internal/service"
 
 	"github.com/google/wire"
 )
 
 //go:generate kratos t wire
 func InitApp() (*App, func(), error) {
-	panic(wire.Build(dao.Provider, service.Provider, grpc.New, http.New, NewApp))
+	panic(wire.Build(dao.Provider, service.Provider, http.New, grpc.New, NewApp))
 }

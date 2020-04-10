@@ -11,6 +11,7 @@ import (
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 )
 
+// App ...
 //go:generate kratos tool wire
 type App struct {
 	svc  *service.Service
@@ -18,6 +19,7 @@ type App struct {
 	grpc *warden.Server
 }
 
+// NewApp ...
 func NewApp(svc *service.Service, h *bm.Engine, g *warden.Server) (app *App, closeFunc func(), err error) {
 	app = &App{
 		svc:  svc,
