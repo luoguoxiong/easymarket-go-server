@@ -24,6 +24,18 @@ service Goods {
       get: "/goods/getGoodsList"
     };
   }
+   // 获取制造商详情
+   rpc GetBrandDetail(BrandsDetailReq) returns (BrandsDetailRes){
+    option (google.api.http) = {
+      get: "/goods/getBrandDetail"
+    };
+  }
+  // 获取制造商列表
+  rpc GetBrandList(BrandsListReq) returns (BrandListRes){
+    option (google.api.http) = {
+      get: "/goods/getBrandList"
+    };
+  }
 }
 
 // 商品详情Req
@@ -62,4 +74,39 @@ message GoodsRes{
   string goods_brief = 4;
   // 商品图片
   string list_pic_url = 5;
+}
+
+// 制造商详情Req
+message  BrandsDetailReq {
+   // 制造商id
+   int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+}
+
+// 制造商详情Res
+message  BrandsDetailRes {
+  // 制造商id
+  int32 id = 1;
+  // 制造商名称
+  string name = 2;
+  // 制造商简介
+  string simple_desc = 3;
+  // 制造商图片
+  string pic_url = 4;
+}
+
+// 制造商列表Res
+message BrandListRes{
+  // 商品列表
+  repeated BrandsDetailRes brandList = 1 [(gogoproto.moretags)='form:"brandList"'];
+  // 商品总数
+  int32 total = 2 [(gogoproto.moretags)='form:"total"'];
+}
+
+
+// 制造商列表Req
+message BrandsListReq {
+  // 页数
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  // 每页数量
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
 }

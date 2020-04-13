@@ -19,3 +19,5 @@ kratos tool protoc --ecode api.proto
 # generate swagger
 
 kratos tool protoc --swagger api.proto
+
+kratos tool swagger serve api.swagger.json

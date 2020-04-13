@@ -25,6 +25,17 @@
       "host": "127.0.0.1",
       "program": "${workspaceRoot}/common/goods/cmd/main.go",
       "args": ["-conf", "../configs"]
+    },
+    {
+      "name": "brandServer",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "remotePath": "",
+      "port": 18002,
+      "host": "127.0.0.1",
+      "program": "${workspaceRoot}/common/brand/cmd/main.go",
+      "args": ["-conf", "../configs"]
     }
   ]
 }
