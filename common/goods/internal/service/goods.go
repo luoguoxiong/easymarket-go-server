@@ -13,6 +13,6 @@ func (s *Service) GetGoodsDetail(ctx context.Context, req *pb.GoodsDetailReq) (r
 
 // GetGoodsList 获取商品列表
 func (s *Service) GetGoodsList(ctx context.Context, req *pb.GoodsReq) (res *pb.GoodsListRes, err error) {
-	res, err = s.dao.GetGoodsList(req.IsHot, req.Page, req.Size_)
+	res, err = s.dao.GetGoodsList(req.IsHot, req.IsNew, req.CategoryId, req.Page, req.Size_)
 	return
 }

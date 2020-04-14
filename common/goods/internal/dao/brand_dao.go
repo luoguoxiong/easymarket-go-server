@@ -11,7 +11,7 @@ func (d *Dao) GetBrandList(page, size int32) (listRes *pb.BrandListRes, err erro
 	var brandList []*pb.BrandsDetailRes
 	var count int32
 
-	err = d.db.Table("nideshop_brand").Count(&count).Limit(size).Offset((page - 1) * size).Find(&brandList).Error
+	err = d.db.Table("easymarket_brand").Count(&count).Limit(size).Offset((page - 1) * size).Find(&brandList).Error
 
 	listRes = &pb.BrandListRes{
 		BrandList: brandList,
@@ -25,7 +25,7 @@ func (d *Dao) GetBrandList(page, size int32) (listRes *pb.BrandListRes, err erro
 func (d *Dao) GetBrandDetail(id int32) (brand *pb.BrandsDetailRes, err error) {
 	brand = &pb.BrandsDetailRes{}
 
-	err = d.db.Table("nideshop_brand").Where("id=?", id).Find(brand).Error
+	err = d.db.Table("easymarket_brand").Where("id=?", id).Find(brand).Error
 	if err == gorm.ErrRecordNotFound {
 		return brand, nil
 	}

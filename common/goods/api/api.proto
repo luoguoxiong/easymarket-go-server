@@ -36,77 +36,120 @@ service Goods {
       get: "/brand/list"
     };
   }
+  // 获取子商品分类列表
+  rpc GetCategoryList(CategoryChildReq) returns (CateGoryListRes){
+    option (google.api.http) = {
+      get: "/category/list"
+    };
+  }
+  // 获取商品分类详情
+  rpc GetCategory(CategoryReq) returns (CategoryRes){
+    option (google.api.http) = {
+      get: "/category"
+    };
+  }
+}
+
+// 获取子分类列表Req
+message CategoryChildReq {
+  int32 parentId = 1  [(gogoproto.moretags) = 'form:"parentId"',(gogoproto.jsontag)='parentId']; // 父级分类id
+}
+
+// 获取分类详情Req
+message CategoryReq {
+  int32 id = 1  [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id']; // 分类id
+}
+
+
+// 商品分类详情Res
+message CategoryRes{
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id']; // 分类id
+  string name = 2 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name']; // 分类名称
+  string front_desc = 3 [(gogoproto.moretags) = 'form:"front_desc"',(gogoproto.jsontag)='front_desc']; // 分类描述
+  string front_name = 4 [(gogoproto.moretags) = 'form:"front_name"',(gogoproto.jsontag)='front_name']; // 分类标题
+  int32 parent_id = 5 [(gogoproto.moretags) = 'form:"parent_id"',(gogoproto.jsontag)='parent_id']; // 分类父级id
+  string wap_banner_url = 6 [(gogoproto.moretags) = 'form:"wap_banner_url"',(gogoproto.jsontag)='wap_banner_url']; // 分类banner图片
+  string icon_url = 7 [(gogoproto.moretags) = 'form:"icon_url"',(gogoproto.jsontag)='icon_url']; // 分类icon
+}
+
+// 分类列表Res
+message CateGoryListRes {
+  repeated CategoryRes categoryList = 1 [(gogoproto.moretags) = 'form:"categoryList"',(gogoproto.jsontag)='categoryList']; // 分类列表;
 }
 
 // 商品详情Req
 message GoodsDetailReq {
   // 商品id
-  int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
 }
 
 // 商品列表Req
 message GoodsReq {
   // 是否是热销 1:是、0:否
-  int32 isHot =1 [(gogoproto.moretags) = 'form:"isHot"'];
+  int32 isHot =1 [(gogoproto.moretags) = 'form:"isHot"',(gogoproto.jsontag)='isHot'];
+  // 是否是新品 1:是、0:否
+  int32 isNew =2 [(gogoproto.moretags) = 'form:"isNew"',(gogoproto.jsontag)='isNew'];
   // 页数
-  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  int32 page = 3 [(gogoproto.moretags) = 'form:"page"',(gogoproto.jsontag)='page'];
   // 每页数量
-  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+  int32 size = 4 [(gogoproto.moretags) = 'form:"size"',(gogoproto.jsontag)='size'];
+  // 商品分类id 
+  int32 categoryId =5 [(gogoproto.moretags) = 'form:"categoryId"',(gogoproto.jsontag)='categoryId'];
 }
 
 // 商品列表Res
 message GoodsListRes{
   // 商品列表
-  repeated GoodsRes goodsList = 1 [(gogoproto.moretags)='form:"goodsList"'];
+  repeated GoodsRes goodsList = 1 [(gogoproto.moretags)='form:"goodsList"',(gogoproto.jsontag)='goodsList'];
   // 商品总数
-  int32 total = 2 [(gogoproto.moretags)='form:"total"'];
+  int32 total = 2 [(gogoproto.moretags)='form:"total"',(gogoproto.jsontag)='total'];
 }
 
 // 商品详情Res
 message GoodsRes{
   // 商品id
-  int32 id = 1;
+  int32 id = 1 [(gogoproto.moretags)='form:"id"',(gogoproto.jsontag)='id'];
   // 商品名称
-  string name = 2;
+  string name = 2 [(gogoproto.moretags)='form:"name"',(gogoproto.jsontag)='name'];
   // 零食价格
-  double retail_price = 3;
+  double retail_price = 3 [(gogoproto.moretags)='form:"retail_price"',(gogoproto.jsontag)='retail_price'];
   // 商品简介
-  string goods_brief = 4;
+  string goods_brief = 4 [(gogoproto.moretags)='form:"goods_brief"',(gogoproto.jsontag)='goods_brief'];
   // 商品图片
-  string list_pic_url = 5;
+  string list_pic_url = 5 [(gogoproto.moretags)='form:"list_pic_url"',(gogoproto.jsontag)='list_pic_url'];
 }
 
 // 制造商详情Req
 message  BrandsDetailReq {
    // 制造商id
-   int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+   int32 id = 1 [(gogoproto.moretags) = 'form:"id" validate:"required"',(gogoproto.jsontag)='id'];
 }
 
 // 制造商详情Res
 message  BrandsDetailRes {
   // 制造商id
-  int32 id = 1;
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
   // 制造商名称
-  string name = 2;
+  string name = 2 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name'];
   // 制造商简介
-  string simple_desc = 3;
+  string simple_desc = 3[(gogoproto.moretags) = 'form:"simple_desc"',(gogoproto.jsontag)='simple_desc'];
   // 制造商图片
-  string pic_url = 4;
+  string pic_url = 4 [(gogoproto.moretags) = 'form:"pic_url"',(gogoproto.jsontag)='pic_url'];
 }
 
 // 制造商列表Res
 message BrandListRes{
   // 商品列表
-  repeated BrandsDetailRes brandList = 1 [(gogoproto.moretags)='form:"brandList"'];
+  repeated BrandsDetailRes brandList = 1 [(gogoproto.moretags)='form:"brandList"',(gogoproto.jsontag)='brandList'];
   // 商品总数
-  int32 total = 2 [(gogoproto.moretags)='form:"total"'];
+  int32 total = 2 [(gogoproto.moretags)='form:"total"',(gogoproto.jsontag)='total'];
 }
 
 
 // 制造商列表Req
 message BrandsListReq {
   // 页数
-  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"',(gogoproto.jsontag)='page'];
   // 每页数量
-  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"',(gogoproto.jsontag)='size'];
 }

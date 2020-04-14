@@ -19,6 +19,8 @@ var PathGoodsGetGoodsDetail = "/goods"
 var PathGoodsGetGoodsList = "/goods/list"
 var PathGoodsGetBrandDetail = "/brand"
 var PathGoodsGetBrandList = "/brand/list"
+var PathGoodsGetCategoryList = "/category/list"
+var PathGoodsGetCategory = "/category"
 
 // GoodsBMServer is the server API for Goods service.
 type GoodsBMServer interface {
@@ -33,6 +35,12 @@ type GoodsBMServer interface {
 
 	// 获取制造商列表
 	GetBrandList(ctx context.Context, req *BrandsListReq) (resp *BrandListRes, err error)
+
+	// 获取子商品分类列表
+	GetCategoryList(ctx context.Context, req *CategoryChildReq) (resp *CateGoryListRes, err error)
+
+	// 获取商品分类详情
+	GetCategory(ctx context.Context, req *CategoryReq) (resp *CategoryRes, err error)
 }
 
 var GoodsSvc GoodsBMServer
@@ -73,6 +81,24 @@ func goodsGetBrandList(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func goodsGetCategoryList(c *bm.Context) {
+	p := new(CategoryChildReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetCategoryList(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetCategory(c *bm.Context) {
+	p := new(CategoryReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetCategory(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterGoodsBMServer Register the blademaster route
 func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	GoodsSvc = server
@@ -80,4 +106,6 @@ func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	e.GET("/goods/list", goodsGetGoodsList)
 	e.GET("/brand", goodsGetBrandDetail)
 	e.GET("/brand/list", goodsGetBrandList)
+	e.GET("/category/list", goodsGetCategoryList)
+	e.GET("/category", goodsGetCategory)
 }

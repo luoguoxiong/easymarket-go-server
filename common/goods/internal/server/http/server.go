@@ -3,6 +3,7 @@ package http
 import (
 	pb "easymarket-go-server/common/goods/api"
 	"easymarket-go-server/common/goods/internal/model"
+	"fmt"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
@@ -40,7 +41,10 @@ func initRouter(e *bm.Engine) {
 // example for http request handler.
 func howToStart(c *bm.Context) {
 	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
+		Hello: "",
+		Lis:   make([]string, 0),
+		Num:   0,
 	}
+	fmt.Println(k)
 	c.JSON(k, nil)
 }
