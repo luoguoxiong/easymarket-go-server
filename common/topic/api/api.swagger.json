@@ -1,0 +1,241 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "api.proto",
+        "version": "1"
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/topic": {
+            "get": {
+                "summary": "获取专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "专题id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "topic.service.v1.Topic"
+                ]
+            }
+        },
+        "/topic/list": {
+            "get": {
+                "summary": "获取专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "description": "页数",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "description": "每页数量",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "topic.service.v1.Topic"
+                ]
+            }
+        },
+        "/topic/related": {
+            "get": {
+                "summary": "获取相似专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "专题id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "description": "页数",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "description": "每页数量",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "topic.service.v1.Topic"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".topic.service.v1.TopicListReq": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "description": "页数"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "description": "专题列表Req"
+        },
+        ".topic.service.v1.TopicListRes": {
+            "type": "object",
+            "properties": {
+                "topicList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.topic.service.v1.TopicRes"
+                    },
+                    "description": "专题详情"
+                },
+                "total": {
+                    "type": "integer",
+                    "description": "专题总数"
+                }
+            },
+            "description": "专题列表Res"
+        },
+        ".topic.service.v1.TopicRelatedReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "专题id"
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "页数"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "description": "相似专题Req"
+        },
+        ".topic.service.v1.TopicReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "专题id"
+                }
+            },
+            "description": "专题Req"
+        },
+        ".topic.service.v1.TopicRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "富文本"
+                },
+                "subtitle": {
+                    "type": "string",
+                    "description": "副标题"
+                },
+                "price_info": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "价格信息"
+                },
+                "scene_pic_url": {
+                    "type": "string",
+                    "description": "图片"
+                }
+            },
+            "description": "专题详情"
+        }
+    }
+}

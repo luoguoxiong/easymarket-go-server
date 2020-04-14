@@ -15,25 +15,25 @@ service Goods {
   // 获取商品详情
   rpc GetGoodsDetail(GoodsDetailReq) returns (GoodsRes){
     option (google.api.http) = {
-      get: "/goods/getGoodsDetail"
+      get: "/goods"
     };
   }
   // 获取商品列表
   rpc GetGoodsList(GoodsReq) returns (GoodsListRes){
     option (google.api.http) = {
-      get: "/goods/getGoodsList"
+      get: "/goods/list"
     };
   }
    // 获取制造商详情
    rpc GetBrandDetail(BrandsDetailReq) returns (BrandsDetailRes){
     option (google.api.http) = {
-      get: "/goods/getBrandDetail"
+      get: "/brand"
     };
   }
   // 获取制造商列表
   rpc GetBrandList(BrandsListReq) returns (BrandListRes){
     option (google.api.http) = {
-      get: "/goods/getBrandList"
+      get: "/brand/list"
     };
   }
 }

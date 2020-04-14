@@ -16,7 +16,86 @@
         "application/json"
     ],
     "paths": {
-        "/app/getGoodsDetail": {
+        "/app/brand": {
+            "get": {
+                "summary": "获取制造商详情",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.BrandsDetailRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "制造商id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/brand/list": {
+            "get": {
+                "summary": "获取制造商列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.BrandListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "description": "页数",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "description": "每页数量",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/goods": {
             "get": {
                 "summary": "获取商品详情",
                 "responses": {
@@ -52,7 +131,7 @@
                 ]
             }
         },
-        "/app/getGoodsList": {
+        "/app/goods/list": {
             "get": {
                 "summary": "获取商品列表",
                 "responses": {
@@ -104,6 +183,69 @@
         }
     },
     "definitions": {
+        ".goods.service.v1.BrandListRes": {
+            "type": "object",
+            "properties": {
+                "brandList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.BrandsDetailRes"
+                    },
+                    "description": "商品列表"
+                },
+                "total": {
+                    "type": "integer",
+                    "description": "商品总数"
+                }
+            },
+            "description": "制造商列表Res"
+        },
+        ".goods.service.v1.BrandsDetailReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "制造商id"
+                }
+            },
+            "description": "制造商详情Req"
+        },
+        ".goods.service.v1.BrandsDetailRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "制造商id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "制造商名称"
+                },
+                "simple_desc": {
+                    "type": "string",
+                    "description": "制造商简介"
+                },
+                "pic_url": {
+                    "type": "string",
+                    "description": "制造商图片"
+                }
+            },
+            "description": "制造商详情Res"
+        },
+        ".goods.service.v1.BrandsListReq": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "description": "页数"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "description": "制造商列表Req"
+        },
         ".goods.service.v1.GoodsDetailReq": {
             "type": "object",
             "properties": {

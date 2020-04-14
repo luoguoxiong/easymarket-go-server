@@ -1,0 +1,6 @@
+[GoodsDB]
+    dsn = "root:ectripaes2013@tcp(202.96.155.121)/nideshop?charset=utf8&parseTime=True&loc=Local"
+    debug = true
+	maxOpenConns = 20
+	maxIdleConns = 10
+	connMaxLifeTime ="4h"

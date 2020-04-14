@@ -16,8 +16,10 @@ var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
-var PathAppGetGoodsList = "/app/getGoodsList"
-var PathAppGetGoodsDetail = "/app/getGoodsDetail"
+var PathAppGetGoodsList = "/app/goods/list"
+var PathAppGetGoodsDetail = "/app/goods"
+var PathAppGetBrandDetail = "/app/brand"
+var PathAppGetBrandList = "/app/brand/list"
 
 // AppBMServer is the server API for App service.
 type AppBMServer interface {
@@ -26,6 +28,12 @@ type AppBMServer interface {
 
 	// 获取商品详情
 	GetGoodsDetail(ctx context.Context, req *goods_service_v1.GoodsDetailReq) (resp *goods_service_v1.GoodsRes, err error)
+
+	// 获取制造商详情
+	GetBrandDetail(ctx context.Context, req *goods_service_v1.BrandsDetailReq) (resp *goods_service_v1.BrandsDetailRes, err error)
+
+	// 获取制造商列表
+	GetBrandList(ctx context.Context, req *goods_service_v1.BrandsListReq) (resp *goods_service_v1.BrandListRes, err error)
 }
 
 var AppSvc AppBMServer
@@ -48,9 +56,29 @@ func appGetGoodsDetail(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func appGetBrandDetail(c *bm.Context) {
+	p := new(goods_service_v1.BrandsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetBrandDetail(c, p)
+	c.JSON(resp, err)
+}
+
+func appGetBrandList(c *bm.Context) {
+	p := new(goods_service_v1.BrandsListReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetBrandList(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAppBMServer Register the blademaster route
 func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	AppSvc = server
-	e.GET("/app/getGoodsList", appGetGoodsList)
-	e.GET("/app/getGoodsDetail", appGetGoodsDetail)
+	e.GET("/app/goods/list", appGetGoodsList)
+	e.GET("/app/goods", appGetGoodsDetail)
+	e.GET("/app/brand", appGetBrandDetail)
+	e.GET("/app/brand/list", appGetBrandList)
 }

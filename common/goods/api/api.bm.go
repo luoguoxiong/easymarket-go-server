@@ -15,10 +15,10 @@ var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
-var PathGoodsGetGoodsDetail = "/goods/getGoodsDetail"
-var PathGoodsGetGoodsList = "/goods/getGoodsList"
-var PathGoodsGetBrandDetail = "/goods/getBrandDetail"
-var PathGoodsGetBrandList = "/goods/getBrandList"
+var PathGoodsGetGoodsDetail = "/goods"
+var PathGoodsGetGoodsList = "/goods/list"
+var PathGoodsGetBrandDetail = "/brand"
+var PathGoodsGetBrandList = "/brand/list"
 
 // GoodsBMServer is the server API for Goods service.
 type GoodsBMServer interface {
@@ -76,8 +76,8 @@ func goodsGetBrandList(c *bm.Context) {
 // RegisterGoodsBMServer Register the blademaster route
 func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	GoodsSvc = server
-	e.GET("/goods/getGoodsDetail", goodsGetGoodsDetail)
-	e.GET("/goods/getGoodsList", goodsGetGoodsList)
-	e.GET("/goods/getBrandDetail", goodsGetBrandDetail)
-	e.GET("/goods/getBrandList", goodsGetBrandList)
+	e.GET("/goods", goodsGetGoodsDetail)
+	e.GET("/goods/list", goodsGetGoodsList)
+	e.GET("/brand", goodsGetBrandDetail)
+	e.GET("/brand/list", goodsGetBrandList)
 }

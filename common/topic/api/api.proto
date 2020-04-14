@@ -1,0 +1,82 @@
+// 定义项目 API 的 proto 文件 可以同时描述 gRPC 和 HTTP API
+//  - https://developers.google.com/protocol-buffers/
+syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+package topic.service.v1;
+
+option go_package = "api";
+
+option (gogoproto.goproto_getters_all) = false;
+
+service Topic {
+  // 获取专题列表
+  rpc GetTopic(TopicReq) returns (TopicRes){
+    option (google.api.http) = {
+      get: "/topic"
+    };
+  }
+  // 获取专题列表
+  rpc GetTopicList(TopicListReq) returns (TopicListRes){
+    option (google.api.http) = {
+      get: "/topic/list"
+    };
+  }
+  // 获取相似专题列表
+  rpc GetTopicRelated(TopicRelatedReq) returns (TopicListRes){
+    option (google.api.http) = {
+      get: "/topic/related"
+    };
+  }
+}
+
+// 专题Req
+message TopicReq {
+  // 专题id
+  int32 id = 2 [(gogoproto.moretags) = 'form:"id"'];
+}
+
+// 相似专题Req
+message TopicRelatedReq {
+  // 专题id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+  // 页数
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  // 每页数量
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+}
+
+// 专题列表Req
+message TopicListReq {
+  // 页数
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  // 每页数量
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+}
+
+// 专题列表Res
+message TopicListRes {
+ // 专题详情
+ repeated TopicRes topicList = 1 [(gogoproto.moretags)='form:"topicList"'];
+ // 专题总数
+ int32 total = 2 [(gogoproto.moretags)='form:"total"'];
+}
+
+
+// 专题详情
+message TopicRes{
+  // id
+  int32 id = 1;
+  // 标题
+  string title = 2;
+  // 富文本
+  string content = 3;
+  // 副标题
+  string subtitle = 4;
+  // 价格信息
+  double price_info = 5;
+  // 图片
+  string scene_pic_url = 6;
+}

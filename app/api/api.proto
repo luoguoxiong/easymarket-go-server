@@ -15,13 +15,25 @@ service App {
   // 获取商品列表
   rpc GetGoodsList(.goods.service.v1.GoodsReq) returns (.goods.service.v1.GoodsListRes) {
     option (google.api.http) = {
-      get: "/app/getGoodsList"
+      get: "/app/goods/list"
     };
   };
   // 获取商品详情
   rpc GetGoodsDetail(.goods.service.v1.GoodsDetailReq) returns (.goods.service.v1.GoodsRes) {
     option (google.api.http) = {
-      get: "/app/getGoodsDetail"
+      get: "/app/goods"
+    };
+  };
+  // 获取制造商详情
+  rpc GetBrandDetail(.goods.service.v1.BrandsDetailReq) returns (.goods.service.v1.BrandsDetailRes) {
+    option (google.api.http) = {
+      get: "/app/brand"
+    };
+  };
+   // 获取制造商列表
+   rpc GetBrandList(.goods.service.v1.BrandsListReq) returns (.goods.service.v1.BrandListRes) {
+    option (google.api.http) = {
+      get: "/app/brand/list"
     };
   };
 }

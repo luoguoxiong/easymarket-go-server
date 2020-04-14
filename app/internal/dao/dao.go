@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"context"
 	goods "easymarket-go-server/common/goods/api"
 	"time"
 
@@ -49,16 +48,4 @@ func New(r *redis.Redis, db *sql.DB) (d *Dao, cf func(), err error) {
 // Close close the resource.
 func (d *Dao) Close() {
 	d.cache.Close()
-}
-
-// GetGoodsList Ping2
-func (d *Dao) GetGoodsList(ctx context.Context, req *goods.GoodsReq) (res *goods.GoodsListRes, err error) {
-	res, err = d.goodsGrpc.GetGoodsList(ctx, req)
-	return
-}
-
-// GetGoodsDetail Ping2
-func (d *Dao) GetGoodsDetail(ctx context.Context, req *goods.GoodsDetailReq) (res *goods.GoodsRes, err error) {
-	res, err = d.goodsGrpc.GetGoodsDetail(ctx, req)
-	return
 }

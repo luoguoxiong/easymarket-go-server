@@ -27,14 +27,14 @@
       "args": ["-conf", "../configs"]
     },
     {
-      "name": "brandServer",
+      "name": "topicServer",
       "type": "go",
       "request": "launch",
       "mode": "auto",
       "remotePath": "",
       "port": 18002,
       "host": "127.0.0.1",
-      "program": "${workspaceRoot}/common/brand/cmd/main.go",
+      "program": "${workspaceRoot}/common/topic/cmd/main.go",
       "args": ["-conf", "../configs"]
     }
   ]

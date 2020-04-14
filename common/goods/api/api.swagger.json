@@ -16,7 +16,7 @@
         "application/json"
     ],
     "paths": {
-        "/goods/getBrandDetail": {
+        "/brand": {
             "get": {
                 "summary": "获取制造商详情",
                 "responses": {
@@ -52,7 +52,7 @@
                 ]
             }
         },
-        "/goods/getBrandList": {
+        "/brand/list": {
             "get": {
                 "summary": "获取制造商列表",
                 "responses": {
@@ -95,7 +95,7 @@
                 ]
             }
         },
-        "/goods/getGoodsDetail": {
+        "/goods": {
             "get": {
                 "summary": "获取商品详情",
                 "responses": {
@@ -131,7 +131,7 @@
                 ]
             }
         },
-        "/goods/getGoodsList": {
+        "/goods/list": {
             "get": {
                 "summary": "获取商品列表",
                 "responses": {
