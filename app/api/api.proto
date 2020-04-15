@@ -4,6 +4,7 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "easymarket-go-server/common/goods/api/api.proto"; 
+import "easymarket-go-server/common/topic/api/api.proto";
 
 package app.service.v1;
 
@@ -13,27 +14,45 @@ option (gogoproto.goproto_getters_all) = false;
 
 service App {
   // 获取商品列表
-  rpc GetGoodsList(.goods.service.v1.GoodsReq) returns (.goods.service.v1.GoodsListRes) {
+  rpc GetGoodsList(goods.service.v1.GoodsReq) returns (goods.service.v1.GoodsListRes) {
     option (google.api.http) = {
       get: "/app/goods/list"
     };
   };
   // 获取商品详情
-  rpc GetGoodsDetail(.goods.service.v1.GoodsDetailReq) returns (.goods.service.v1.GoodsRes) {
+  rpc GetGoodsDetail(goods.service.v1.GoodsDetailReq) returns (goods.service.v1.GoodsRes) {
     option (google.api.http) = {
       get: "/app/goods"
     };
   };
   // 获取制造商详情
-  rpc GetBrandDetail(.goods.service.v1.BrandsDetailReq) returns (.goods.service.v1.BrandsDetailRes) {
+  rpc GetBrandDetail(goods.service.v1.BrandsDetailReq) returns (goods.service.v1.BrandsDetailRes) {
     option (google.api.http) = {
       get: "/app/brand"
     };
   };
    // 获取制造商列表
-   rpc GetBrandList(.goods.service.v1.BrandsListReq) returns (.goods.service.v1.BrandListRes) {
+   rpc GetBrandList(goods.service.v1.BrandsListReq) returns (goods.service.v1.BrandListRes) {
     option (google.api.http) = {
       get: "/app/brand/list"
     };
   };
+  // 获取专题详情
+  rpc GetTopic(topic.service.v1.TopicReq) returns (topic.service.v1.TopicRes){
+    option (google.api.http) = {
+      get: "/app/topic"
+    };
+  }
+  // 获取专题列表
+  rpc GetTopicList(topic.service.v1.TopicListReq) returns (topic.service.v1.TopicListRes){
+    option (google.api.http) = {
+      get: "/app/topic/list"
+    };
+  }
+  // 获取相似专题列表
+  rpc GetTopicRelated(topic.service.v1.TopicRelatedReq) returns (topic.service.v1.TopicListRes){
+    option (google.api.http) = {
+      get: "/app/topic/related"
+    };
+  }
 }

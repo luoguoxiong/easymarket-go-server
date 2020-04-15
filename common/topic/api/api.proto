@@ -35,48 +35,48 @@ service Topic {
 // 专题Req
 message TopicReq {
   // 专题id
-  int32 id = 2 [(gogoproto.moretags) = 'form:"id"'];
+  int32 id = 2 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
 }
 
 // 相似专题Req
 message TopicRelatedReq {
   // 专题id
-  int32 id = 1 [(gogoproto.moretags) = 'form:"id"'];
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
   // 页数
-  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"',(gogoproto.jsontag)='page'];
   // 每页数量
-  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"',(gogoproto.jsontag)='size'];
 }
 
 // 专题列表Req
 message TopicListReq {
   // 页数
-  int32 page = 2 [(gogoproto.moretags) = 'form:"page"'];
+  int32 page = 2 [(gogoproto.moretags) = 'form:"page"',(gogoproto.jsontag)='parentId'];
   // 每页数量
-  int32 size = 3 [(gogoproto.moretags) = 'form:"size"'];
+  int32 size = 3 [(gogoproto.moretags) = 'form:"size"',(gogoproto.jsontag)='parentId'];
 }
 
 // 专题列表Res
 message TopicListRes {
  // 专题详情
- repeated TopicRes topicList = 1 [(gogoproto.moretags)='form:"topicList"'];
+ repeated TopicRes topicList = 1 [(gogoproto.moretags)='form:"topicList"',(gogoproto.jsontag)='topicList'];
  // 专题总数
- int32 total = 2 [(gogoproto.moretags)='form:"total"'];
+ int32 total = 2 [(gogoproto.moretags)='form:"total"',(gogoproto.jsontag)='total'];
 }
 
 
 // 专题详情
 message TopicRes{
   // id
-  int32 id = 1;
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
   // 标题
-  string title = 2;
+  string title = 2 [(gogoproto.moretags) = 'form:"title"',(gogoproto.jsontag)='title'];
   // 富文本
-  string content = 3;
+  string content = 3 [(gogoproto.moretags) = 'form:"content"',(gogoproto.jsontag)='content'];
   // 副标题
-  string subtitle = 4;
+  string subtitle = 4 [(gogoproto.moretags) = 'form:"subtitle"',(gogoproto.jsontag)='subtitle'];
   // 价格信息
-  double price_info = 5;
+  double price_info = 5 [(gogoproto.moretags) = 'form:"price_info"',(gogoproto.jsontag)='price_info'];
   // 图片
-  string scene_pic_url = 6;
+  string scene_pic_url = 6 [(gogoproto.moretags) = 'form:"scene_pic_url"',(gogoproto.jsontag)='scene_pic_url'];
 }

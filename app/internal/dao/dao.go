@@ -23,6 +23,7 @@ type Dao struct {
 	cache      *fanout.Fanout
 	demoExpire int32
 	goodsGrpc  goods.GoodsClient
+	// topicGrpc  topic.TopicClient
 }
 
 // New new a dao and return.

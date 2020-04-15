@@ -43,7 +43,7 @@
                         "name": "id",
                         "description": "制造商id",
                         "in": "query",
-                        "required": false,
+                        "required": true,
                         "type": "integer"
                     }
                 ],
@@ -162,6 +162,149 @@
                         "type": "integer"
                     },
                     {
+                        "name": "isNew",
+                        "description": "是否是新品 1:是、0:否",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "description": "页数",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "description": "每页数量",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "categoryId",
+                        "description": "商品分类id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/topic": {
+            "get": {
+                "summary": "获取专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "专题id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/topic/list": {
+            "get": {
+                "summary": "获取专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "page",
+                        "description": "页数",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "size",
+                        "description": "每页数量",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/topic/related": {
+            "get": {
+                "summary": "获取相似专题列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.topic.service.v1.TopicListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "专题id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
                         "name": "page",
                         "description": "页数",
                         "in": "query",
@@ -208,7 +351,10 @@
                     "description": "制造商id"
                 }
             },
-            "description": "制造商详情Req"
+            "description": "制造商详情Req",
+            "required": [
+                "id"
+            ]
         },
         ".goods.service.v1.BrandsDetailRes": {
             "type": "object",
@@ -280,6 +426,10 @@
                     "type": "integer",
                     "description": "是否是热销 1:是、0:否"
                 },
+                "isNew": {
+                    "type": "integer",
+                    "description": "是否是新品 1:是、0:否"
+                },
                 "page": {
                     "type": "integer",
                     "description": "页数"
@@ -287,6 +437,10 @@
                 "size": {
                     "type": "integer",
                     "description": "每页数量"
+                },
+                "categoryId": {
+                    "type": "integer",
+                    "description": "商品分类id"
                 }
             },
             "description": "商品列表Req"
@@ -317,6 +471,96 @@
                 }
             },
             "description": "商品详情Res"
+        },
+        ".topic.service.v1.TopicListReq": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "description": "页数"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "description": "专题列表Req"
+        },
+        ".topic.service.v1.TopicListRes": {
+            "type": "object",
+            "properties": {
+                "topicList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.topic.service.v1.TopicRes"
+                    },
+                    "description": "专题详情"
+                },
+                "total": {
+                    "type": "integer",
+                    "description": "专题总数"
+                }
+            },
+            "description": "专题列表Res"
+        },
+        ".topic.service.v1.TopicRelatedReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "专题id"
+                },
+                "page": {
+                    "type": "integer",
+                    "description": "页数"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "description": "相似专题Req"
+        },
+        ".topic.service.v1.TopicReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "专题id"
+                }
+            },
+            "description": "专题Req"
+        },
+        ".topic.service.v1.TopicRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "富文本"
+                },
+                "subtitle": {
+                    "type": "string",
+                    "description": "副标题"
+                },
+                "price_info": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "价格信息"
+                },
+                "scene_pic_url": {
+                    "type": "string",
+                    "description": "图片"
+                }
+            },
+            "description": "专题详情"
         }
     }
 }

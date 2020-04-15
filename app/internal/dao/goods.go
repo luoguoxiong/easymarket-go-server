@@ -8,6 +8,15 @@ import (
 // GetGoodsList 获取商品列表
 func (d *Dao) GetGoodsList(ctx context.Context, req *goods.GoodsReq) (res *goods.GoodsListRes, err error) {
 	res, err = d.goodsGrpc.GetGoodsList(ctx, req)
+	// 不是很喜欢这样处理slice零值问题...
+	goodsList := make([]*goods.GoodsRes, 0)
+	if len(res.GoodsList) > 0 {
+		goodsList = res.GoodsList
+	}
+	res = &goods.GoodsListRes{
+		GoodsList: goodsList,
+		Total:     res.Total,
+	}
 	return
 }
 

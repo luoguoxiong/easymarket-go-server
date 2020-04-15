@@ -2,3 +2,8 @@
     [servers.goods-service]
     timeout = "600000ms"
     addr = "127.0.0.1:28001"
+    maxReceiveMessageSize = 0
+    [servers.topic-service]
+    timeout = "600000ms"
+    addr = "127.0.0.1:28002"
+    maxReceiveMessageSize = 0

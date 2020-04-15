@@ -27,7 +27,7 @@ func (d *Dao) GetBrandDetail(id int32) (brand *pb.BrandsDetailRes, err error) {
 
 	err = d.db.Table("easymarket_brand").Where("id=?", id).Find(brand).Error
 	if err == gorm.ErrRecordNotFound {
-		return brand, nil
+		return nil, nil
 	}
 
 	return

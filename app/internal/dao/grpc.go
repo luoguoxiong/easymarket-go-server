@@ -2,6 +2,7 @@ package dao
 
 import (
 	goods "easymarket-go-server/common/goods/api"
+	"fmt"
 
 	"context"
 
@@ -35,15 +36,17 @@ func NewGrpcClient() goods.GoodsClient {
 	if err != nil {
 		panic(err)
 	}
-	config := service.Servers["goods-service"]
+	fmt.Println(service.Servers)
+	goodsConfig := service.Servers["goods-service"]
 	cfg := &GRPCConf{
-		Addr: config.Addr,
+		Addr: goodsConfig.Addr,
 		Server: &warden.ClientConfig{
-			Timeout: config.Timeout,
+			Timeout: goodsConfig.Timeout,
 		},
-		MaxReceiveMessageSize: config.MaxReceiveMessageSize,
+		MaxReceiveMessageSize: goodsConfig.MaxReceiveMessageSize,
 	}
-
+	topicConfig := service.Servers["topic-service"]
+	fmt.Println(topicConfig)
 	cc, err := warden.NewClient(cfg.Server).Dial(context.Background(), cfg.Addr)
 	if err != nil {
 		panic(err)

@@ -10,6 +10,7 @@ import (
 	"github.com/go-kratos/kratos/pkg/net/http/blademaster/binding"
 )
 import goods_service_v1 "easymarket-go-server/common/goods/api"
+import topic_service_v1 "easymarket-go-server/common/topic/api"
 
 // to suppressed 'imported but not used warning'
 var _ *bm.Context
@@ -20,6 +21,9 @@ var PathAppGetGoodsList = "/app/goods/list"
 var PathAppGetGoodsDetail = "/app/goods"
 var PathAppGetBrandDetail = "/app/brand"
 var PathAppGetBrandList = "/app/brand/list"
+var PathAppGetTopic = "/app/topic"
+var PathAppGetTopicList = "/app/topic/list"
+var PathAppGetTopicRelated = "/app/topic/related"
 
 // AppBMServer is the server API for App service.
 type AppBMServer interface {
@@ -34,6 +38,15 @@ type AppBMServer interface {
 
 	// 获取制造商列表
 	GetBrandList(ctx context.Context, req *goods_service_v1.BrandsListReq) (resp *goods_service_v1.BrandListRes, err error)
+
+	// 获取专题列表
+	GetTopic(ctx context.Context, req *topic_service_v1.TopicReq) (resp *topic_service_v1.TopicRes, err error)
+
+	// 获取专题列表
+	GetTopicList(ctx context.Context, req *topic_service_v1.TopicListReq) (resp *topic_service_v1.TopicListRes, err error)
+
+	// 获取相似专题列表
+	GetTopicRelated(ctx context.Context, req *topic_service_v1.TopicRelatedReq) (resp *topic_service_v1.TopicListRes, err error)
 }
 
 var AppSvc AppBMServer
@@ -74,6 +87,33 @@ func appGetBrandList(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func appGetTopic(c *bm.Context) {
+	p := new(topic_service_v1.TopicReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetTopic(c, p)
+	c.JSON(resp, err)
+}
+
+func appGetTopicList(c *bm.Context) {
+	p := new(topic_service_v1.TopicListReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetTopicList(c, p)
+	c.JSON(resp, err)
+}
+
+func appGetTopicRelated(c *bm.Context) {
+	p := new(topic_service_v1.TopicRelatedReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetTopicRelated(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAppBMServer Register the blademaster route
 func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	AppSvc = server
@@ -81,4 +121,7 @@ func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	e.GET("/app/goods", appGetGoodsDetail)
 	e.GET("/app/brand", appGetBrandDetail)
 	e.GET("/app/brand/list", appGetBrandList)
+	e.GET("/app/topic", appGetTopic)
+	e.GET("/app/topic/list", appGetTopicList)
+	e.GET("/app/topic/related", appGetTopicRelated)
 }

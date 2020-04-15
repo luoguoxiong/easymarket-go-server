@@ -27,7 +27,7 @@ func (d *Dao) GetTopic(id int32) (topic *pb.TopicRes, err error) {
 
 	err = d.db.Table("nideshop_topic").Where("id=?", id).Find(topic).Error
 	if err == gorm.ErrRecordNotFound {
-		return topic, nil
+		return nil, nil
 	}
 
 	return
