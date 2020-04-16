@@ -120,6 +120,7 @@
                 "parameters": [
                     {
                         "name": "id",
+                        "description": "分类id",
                         "in": "query",
                         "required": false,
                         "type": "integer"
@@ -155,6 +156,7 @@
                 "parameters": [
                     {
                         "name": "parentId",
+                        "description": "父级分类id",
                         "in": "query",
                         "required": false,
                         "type": "integer"
@@ -340,7 +342,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/.goods.service.v1.CategoryRes"
-                    }
+                    },
+                    "description": "分类列表;"
                 }
             },
             "description": "分类列表Res"
@@ -349,7 +352,8 @@
             "type": "object",
             "properties": {
                 "parentId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "父级分类id"
                 }
             },
             "description": "获取子分类列表Req"
@@ -358,7 +362,8 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "分类id"
                 }
             },
             "description": "获取分类详情Req"
@@ -367,25 +372,32 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "分类id"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "分类名称"
                 },
                 "front_desc": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "分类描述"
                 },
                 "front_name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "分类标题"
                 },
                 "parent_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "分类父级id"
                 },
                 "wap_banner_url": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "分类banner图片"
                 },
                 "icon_url": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "分类icon"
                 }
             },
             "description": "商品分类详情Res"

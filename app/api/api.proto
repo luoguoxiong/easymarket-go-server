@@ -55,4 +55,16 @@ service App {
       get: "/app/topic/related"
     };
   }
+  // 获取子商品分类列表
+  rpc GetCategoryList(goods.service.v1.CategoryChildReq) returns (goods.service.v1.CateGoryListRes){
+    option (google.api.http) = {
+      get: "/app/category/list"
+    };
+  }
+  // 获取商品分类详情
+  rpc GetCategory(goods.service.v1.CategoryReq) returns (goods.service.v1.CategoryRes){
+    option (google.api.http) = {
+      get: "/app/category"
+    };
+  }
 }

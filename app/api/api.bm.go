@@ -24,6 +24,8 @@ var PathAppGetBrandList = "/app/brand/list"
 var PathAppGetTopic = "/app/topic"
 var PathAppGetTopicList = "/app/topic/list"
 var PathAppGetTopicRelated = "/app/topic/related"
+var PathAppGetCategoryList = "/app/category/list"
+var PathAppGetCategory = "/app/category"
 
 // AppBMServer is the server API for App service.
 type AppBMServer interface {
@@ -39,7 +41,7 @@ type AppBMServer interface {
 	// 获取制造商列表
 	GetBrandList(ctx context.Context, req *goods_service_v1.BrandsListReq) (resp *goods_service_v1.BrandListRes, err error)
 
-	// 获取专题列表
+	// 获取专题详情
 	GetTopic(ctx context.Context, req *topic_service_v1.TopicReq) (resp *topic_service_v1.TopicRes, err error)
 
 	// 获取专题列表
@@ -47,6 +49,12 @@ type AppBMServer interface {
 
 	// 获取相似专题列表
 	GetTopicRelated(ctx context.Context, req *topic_service_v1.TopicRelatedReq) (resp *topic_service_v1.TopicListRes, err error)
+
+	// 获取子商品分类列表
+	GetCategoryList(ctx context.Context, req *goods_service_v1.CategoryChildReq) (resp *goods_service_v1.CateGoryListRes, err error)
+
+	// 获取商品分类详情
+	GetCategory(ctx context.Context, req *goods_service_v1.CategoryReq) (resp *goods_service_v1.CategoryRes, err error)
 }
 
 var AppSvc AppBMServer
@@ -114,6 +122,24 @@ func appGetTopicRelated(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func appGetCategoryList(c *bm.Context) {
+	p := new(goods_service_v1.CategoryChildReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetCategoryList(c, p)
+	c.JSON(resp, err)
+}
+
+func appGetCategory(c *bm.Context) {
+	p := new(goods_service_v1.CategoryReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetCategory(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAppBMServer Register the blademaster route
 func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	AppSvc = server
@@ -124,4 +150,6 @@ func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	e.GET("/app/topic", appGetTopic)
 	e.GET("/app/topic/list", appGetTopicList)
 	e.GET("/app/topic/related", appGetTopicRelated)
+	e.GET("/app/category/list", appGetCategoryList)
+	e.GET("/app/category", appGetCategory)
 }

@@ -52,29 +52,39 @@ service Goods {
 
 // 获取子分类列表Req
 message CategoryChildReq {
-  int32 parentId = 1  [(gogoproto.moretags) = 'form:"parentId"',(gogoproto.jsontag)='parentId']; // 父级分类id
+  // 父级分类id
+  int32 parentId = 1  [(gogoproto.moretags) = 'form:"parentId"',(gogoproto.jsontag)='parentId']; 
 }
 
 // 获取分类详情Req
 message CategoryReq {
-  int32 id = 1  [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id']; // 分类id
+  // 分类id
+  int32 id = 1  [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
 }
 
 
 // 商品分类详情Res
 message CategoryRes{
-  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id']; // 分类id
-  string name = 2 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name']; // 分类名称
-  string front_desc = 3 [(gogoproto.moretags) = 'form:"front_desc"',(gogoproto.jsontag)='front_desc']; // 分类描述
-  string front_name = 4 [(gogoproto.moretags) = 'form:"front_name"',(gogoproto.jsontag)='front_name']; // 分类标题
-  int32 parent_id = 5 [(gogoproto.moretags) = 'form:"parent_id"',(gogoproto.jsontag)='parent_id']; // 分类父级id
-  string wap_banner_url = 6 [(gogoproto.moretags) = 'form:"wap_banner_url"',(gogoproto.jsontag)='wap_banner_url']; // 分类banner图片
-  string icon_url = 7 [(gogoproto.moretags) = 'form:"icon_url"',(gogoproto.jsontag)='icon_url']; // 分类icon
+  // 分类id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 分类名称
+  string name = 2 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name'];
+  // 分类描述
+  string front_desc = 3 [(gogoproto.moretags) = 'form:"front_desc"',(gogoproto.jsontag)='front_desc'];
+  // 分类标题 
+  string front_name = 4 [(gogoproto.moretags) = 'form:"front_name"',(gogoproto.jsontag)='front_name'];
+  // 分类父级id
+  int32 parent_id = 5 [(gogoproto.moretags) = 'form:"parent_id"',(gogoproto.jsontag)='parent_id'];
+  // 分类banner图片
+  string wap_banner_url = 6 [(gogoproto.moretags) = 'form:"wap_banner_url"',(gogoproto.jsontag)='wap_banner_url'];
+  // 分类icon
+  string icon_url = 7 [(gogoproto.moretags) = 'form:"icon_url"',(gogoproto.jsontag)='icon_url'];
 }
 
 // 分类列表Res
 message CateGoryListRes {
-  repeated CategoryRes categoryList = 1 [(gogoproto.moretags) = 'form:"categoryList"',(gogoproto.jsontag)='categoryList']; // 分类列表;
+  // 分类列表;
+  repeated CategoryRes categoryList = 1 [(gogoproto.moretags) = 'form:"categoryList"',(gogoproto.jsontag)='categoryList'];
 }
 
 // 商品详情Req

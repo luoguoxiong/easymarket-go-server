@@ -2,54 +2,70 @@ package dao
 
 import (
 	goods "easymarket-go-server/common/goods/api"
-	"fmt"
+	topic "easymarket-go-server/common/topic/api"
 
 	"context"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 	xtime "github.com/go-kratos/kratos/pkg/time"
+	"google.golang.org/grpc"
 )
 
-// GRPCConf config for client
-type GRPCConf struct {
-	Server                *warden.ClientConfig
-	Addr                  string
-	MaxReceiveMessageSize int
+// GrpcServiceConfig grpc服务配置
+type GrpcServiceConfig struct {
+	Servers map[string]*ServerConfig
 }
 
-// ServerConfig ...
+// ServerConfig 配置文件
 type ServerConfig struct {
 	Addr                  string
 	Timeout               xtime.Duration
 	MaxReceiveMessageSize int
 }
 
-// NewGrpcClient 实例化Grpc
-func NewGrpcClient() goods.GoodsClient {
-	var (
-		service struct {
-			Servers map[string]*ServerConfig
-		}
-	)
+// GRPCConf grpcclient配置
+type GRPCConf struct {
+	Server                *warden.ClientConfig
+	Addr                  string
+	MaxReceiveMessageSize int
+}
+
+// NewGrpcConfig 初始化配置文件
+func NewGrpcConfig() *GrpcServiceConfig {
+	var service GrpcServiceConfig
 	err := paladin.Get("dao.toml").UnmarshalTOML(&service)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(service.Servers)
-	goodsConfig := service.Servers["goods-service"]
+	return &service
+}
+
+// setConfig 初始化grpc连接
+func setConfig(g *GrpcServiceConfig, serverName string) (conn *grpc.ClientConn, err error) {
+	config := g.Servers[serverName]
 	cfg := &GRPCConf{
-		Addr: goodsConfig.Addr,
+		Addr: config.Addr,
 		Server: &warden.ClientConfig{
-			Timeout: goodsConfig.Timeout,
+			Timeout: config.Timeout,
 		},
-		MaxReceiveMessageSize: goodsConfig.MaxReceiveMessageSize,
+		MaxReceiveMessageSize: config.MaxReceiveMessageSize,
 	}
-	topicConfig := service.Servers["topic-service"]
-	fmt.Println(topicConfig)
-	cc, err := warden.NewClient(cfg.Server).Dial(context.Background(), cfg.Addr)
+	conn, err = warden.NewClient(cfg.Server).Dial(context.Background(), cfg.Addr)
 	if err != nil {
 		panic(err)
 	}
-	return goods.NewGoodsClient(cc)
+	return
+}
+
+// NewGoodsClient 实例化goods-grpc服务客户端
+func (g *GrpcServiceConfig) NewGoodsClient() goods.GoodsClient {
+	c, _ := setConfig(g, "goods-service")
+	return goods.NewGoodsClient(c)
+}
+
+// NewTopicClient 实例化topic-grpc服务客户端
+func (g *GrpcServiceConfig) NewTopicClient() topic.TopicClient {
+	c, _ := setConfig(g, "topic-service")
+	return topic.NewTopicClient(c)
 }

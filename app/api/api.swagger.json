@@ -95,6 +95,78 @@
                 ]
             }
         },
+        "/app/category": {
+            "get": {
+                "summary": "获取商品分类详情",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.CategoryRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "分类id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/category/list": {
+            "get": {
+                "summary": "获取子商品分类列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.CateGoryListRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "parentId",
+                        "description": "父级分类id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
         "/app/goods": {
             "get": {
                 "summary": "获取商品详情",
@@ -197,7 +269,7 @@
         },
         "/app/topic": {
             "get": {
-                "summary": "获取专题列表",
+                "summary": "获取专题详情",
                 "responses": {
                     "200": {
                         "description": "A successful response.",
@@ -391,6 +463,73 @@
                 }
             },
             "description": "制造商列表Req"
+        },
+        ".goods.service.v1.CateGoryListRes": {
+            "type": "object",
+            "properties": {
+                "categoryList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.CategoryRes"
+                    },
+                    "description": "分类列表;"
+                }
+            },
+            "description": "分类列表Res"
+        },
+        ".goods.service.v1.CategoryChildReq": {
+            "type": "object",
+            "properties": {
+                "parentId": {
+                    "type": "integer",
+                    "description": "父级分类id"
+                }
+            },
+            "description": "获取子分类列表Req"
+        },
+        ".goods.service.v1.CategoryReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "分类id"
+                }
+            },
+            "description": "获取分类详情Req"
+        },
+        ".goods.service.v1.CategoryRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "分类id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "分类名称"
+                },
+                "front_desc": {
+                    "type": "string",
+                    "description": "分类描述"
+                },
+                "front_name": {
+                    "type": "string",
+                    "description": "分类标题"
+                },
+                "parent_id": {
+                    "type": "integer",
+                    "description": "分类父级id"
+                },
+                "wap_banner_url": {
+                    "type": "string",
+                    "description": "分类banner图片"
+                },
+                "icon_url": {
+                    "type": "string",
+                    "description": "分类icon"
+                }
+            },
+            "description": "商品分类详情Res"
         },
         ".goods.service.v1.GoodsDetailReq": {
             "type": "object",

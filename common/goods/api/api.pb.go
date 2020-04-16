@@ -32,6 +32,7 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 获取子分类列表Req
 type CategoryChildReq struct {
+	// 父级分类id
 	ParentId             int32    `protobuf:"varint,1,opt,name=parentId,proto3" json:"parentId" form:"parentId"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -73,6 +74,7 @@ var xxx_messageInfo_CategoryChildReq proto.InternalMessageInfo
 
 // 获取分类详情Req
 type CategoryReq struct {
+	// 分类id
 	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -114,12 +116,19 @@ var xxx_messageInfo_CategoryReq proto.InternalMessageInfo
 
 // 商品分类详情Res
 type CategoryRes struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name" form:"name"`
-	FrontDesc            string   `protobuf:"bytes,3,opt,name=front_desc,json=frontDesc,proto3" json:"front_desc" form:"front_desc"`
-	FrontName            string   `protobuf:"bytes,4,opt,name=front_name,json=frontName,proto3" json:"front_name" form:"front_name"`
-	ParentId             int32    `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id" form:"parent_id"`
-	WapBannerUrl         string   `protobuf:"bytes,6,opt,name=wap_banner_url,json=wapBannerUrl,proto3" json:"wap_banner_url" form:"wap_banner_url"`
+	// 分类id
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id" form:"id"`
+	// 分类名称
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name" form:"name"`
+	// 分类描述
+	FrontDesc string `protobuf:"bytes,3,opt,name=front_desc,json=frontDesc,proto3" json:"front_desc" form:"front_desc"`
+	// 分类标题
+	FrontName string `protobuf:"bytes,4,opt,name=front_name,json=frontName,proto3" json:"front_name" form:"front_name"`
+	// 分类父级id
+	ParentId int32 `protobuf:"varint,5,opt,name=parent_id,json=parentId,proto3" json:"parent_id" form:"parent_id"`
+	// 分类banner图片
+	WapBannerUrl string `protobuf:"bytes,6,opt,name=wap_banner_url,json=wapBannerUrl,proto3" json:"wap_banner_url" form:"wap_banner_url"`
+	// 分类icon
 	IconUrl              string   `protobuf:"bytes,7,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url" form:"icon_url"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -161,6 +170,7 @@ var xxx_messageInfo_CategoryRes proto.InternalMessageInfo
 
 // 分类列表Res
 type CateGoryListRes struct {
+	// 分类列表;
 	CategoryList         []*CategoryRes `protobuf:"bytes,1,rep,name=categoryList,proto3" json:"categoryList" form:"categoryList"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
