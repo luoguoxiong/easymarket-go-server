@@ -203,6 +203,114 @@
                 ]
             }
         },
+        "/goods/attribute": {
+            "get": {
+                "summary": "获取商品特点",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.AttributeList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "商品id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
+        },
+        "/goods/gallery": {
+            "get": {
+                "summary": "获取商品轮播图",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsGalleryList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "商品id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
+        },
+        "/goods/issue": {
+            "get": {
+                "summary": "获取商品常见疑问",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsIssueList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "商品id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
+        },
         "/goods/list": {
             "get": {
                 "summary": "获取商品列表",
@@ -266,9 +374,108 @@
                     "goods.service.v1.Goods"
                 ]
             }
+        },
+        "/goods/product": {
+            "get": {
+                "summary": "获取商品产品列表",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsProductList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "商品id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
+        },
+        "/goods/sizeList": {
+            "get": {
+                "summary": "获取商品可选规格",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.GoodsSizeList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "商品id",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
         }
     },
     "definitions": {
+        ".goods.service.v1.Attribute": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "特点标签"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "特点详情"
+                }
+            },
+            "description": "商品特点"
+        },
+        ".goods.service.v1.AttributeList": {
+            "type": "object",
+            "properties": {
+                "attributeList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.Attribute"
+                    },
+                    "description": "商品特点列表"
+                }
+            },
+            "description": "商品特点列表"
+        },
         ".goods.service.v1.BrandListRes": {
             "type": "object",
             "properties": {
@@ -412,6 +619,76 @@
             },
             "description": "商品详情Req"
         },
+        ".goods.service.v1.GoodsGallery": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "goods_id": {
+                    "type": "integer",
+                    "description": "商品id"
+                },
+                "img_url": {
+                    "type": "string",
+                    "description": "轮播图图片"
+                },
+                "img_desc": {
+                    "type": "string",
+                    "description": "轮播描述"
+                }
+            },
+            "description": "商品轮播图"
+        },
+        ".goods.service.v1.GoodsGalleryList": {
+            "type": "object",
+            "properties": {
+                "goodsGallery": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsGallery"
+                    },
+                    "description": "商品规格描述列表"
+                }
+            },
+            "description": "轮播图列表"
+        },
+        ".goods.service.v1.GoodsIssue": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "goods_id": {
+                    "type": "integer",
+                    "description": "商品id"
+                },
+                "question": {
+                    "type": "integer",
+                    "description": "商品常见疑问"
+                },
+                "answer": {
+                    "type": "integer",
+                    "description": "疑问解答"
+                }
+            },
+            "description": "商品常见疑问"
+        },
+        ".goods.service.v1.GoodsIssueList": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsIssue"
+                    },
+                    "description": "商品疑问列表"
+                }
+            },
+            "description": "商品疑问列表"
+        },
         ".goods.service.v1.GoodsListRes": {
             "type": "object",
             "properties": {
@@ -428,6 +705,19 @@
                 }
             },
             "description": "商品列表Res"
+        },
+        ".goods.service.v1.GoodsProductList": {
+            "type": "object",
+            "properties": {
+                "productList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.Product"
+                    },
+                    "description": "产品列表"
+                }
+            },
+            "description": "商品产品列表"
         },
         ".goods.service.v1.GoodsReq": {
             "type": "object",
@@ -478,9 +768,108 @@
                 "list_pic_url": {
                     "type": "string",
                     "description": "商品图片"
+                },
+                "goods_desc": {
+                    "type": "string",
+                    "description": "商品富文本"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "description": "所属制造商"
                 }
             },
             "description": "商品详情Res"
+        },
+        ".goods.service.v1.GoodsSize": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "商品规格id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "商品规格名称"
+                },
+                "valueList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsSpec"
+                    },
+                    "description": "可选属性"
+                }
+            },
+            "description": "商品规格"
+        },
+        ".goods.service.v1.GoodsSizeList": {
+            "type": "object",
+            "properties": {
+                "goodsSizeList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.GoodsSize"
+                    },
+                    "description": "商品规格"
+                }
+            },
+            "description": "商品规格列表"
+        },
+        ".goods.service.v1.GoodsSpec": {
+            "type": "object",
+            "properties": {
+                "goods_id": {
+                    "type": "integer",
+                    "description": "商品id"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "商品属性id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "商品规格名称"
+                },
+                "pic_url": {
+                    "type": "string",
+                    "description": "商品属性图片"
+                },
+                "specification_id": {
+                    "type": "integer",
+                    "description": "商品规格id"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "商品属性名称"
+                }
+            },
+            "description": "商品属性"
+        },
+        ".goods.service.v1.Product": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "goods_id": {
+                    "type": "integer",
+                    "description": "商品id"
+                },
+                "goods_specification_ids": {
+                    "type": "string",
+                    "description": "商品组合属性"
+                },
+                "goods_number": {
+                    "type": "integer",
+                    "description": "产品库存"
+                },
+                "retail_price": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "产品价格"
+                }
+            },
+            "description": "商品产品信息"
         }
     }
 }

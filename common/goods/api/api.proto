@@ -48,6 +48,38 @@ service Goods {
       get: "/category"
     };
   }
+  // 获取商品可选规格
+  rpc GetGoodsSize(GoodsDetailReq) returns (GoodsSizeList){
+    option (google.api.http) = {
+      get: "/goods/sizeList"
+    };
+  }
+  // 获取商品轮播图
+  rpc GetGoodsGallery(GoodsDetailReq) returns (GoodsGalleryList){
+    option (google.api.http) = {
+      get: "/goods/gallery"
+    };
+  }
+  // 获取商品特点
+  rpc GetGoodsAttribute(GoodsDetailReq) returns (AttributeList){
+    option (google.api.http) = {
+      get: "/goods/attribute"
+    };
+  }
+
+  // 获取商品常见疑问
+  rpc GetGoodsIssueList(GoodsDetailReq) returns (GoodsIssueList){
+    option (google.api.http) = {
+      get: "/goods/issue"
+    };
+  }
+
+  // 获取商品产品列表
+  rpc GetGoodsProductList(GoodsDetailReq) returns (GoodsProductList){
+    option (google.api.http) = {
+      get: "/goods/product"
+    };
+  }
 }
 
 // 获取子分类列表Req
@@ -127,6 +159,10 @@ message GoodsRes{
   string goods_brief = 4 [(gogoproto.moretags)='form:"goods_brief"',(gogoproto.jsontag)='goods_brief'];
   // 商品图片
   string list_pic_url = 5 [(gogoproto.moretags)='form:"list_pic_url"',(gogoproto.jsontag)='list_pic_url'];
+  // 商品富文本
+  string goods_desc = 6 [(gogoproto.moretags)='form:"goods_desc"',(gogoproto.jsontag)='goods_desc'];
+  // 所属制造商
+  int32 brand_id = 7 [(gogoproto.moretags)='form:"brand_id"',(gogoproto.jsontag)='brand_id'];
 }
 
 // 制造商详情Req
@@ -163,3 +199,112 @@ message BrandsListReq {
   // 每页数量
   int32 size = 3 [(gogoproto.moretags) = 'form:"size"',(gogoproto.jsontag)='size'];
 }
+
+// 商品规格
+message GoodsSize {
+  // 商品规格id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 商品规格名称
+  string name = 2 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name'];
+  // 可选属性
+  repeated GoodsSpec valueList = 3 [(gogoproto.moretags) = 'form:"valueList"',(gogoproto.jsontag)='valueList'];
+}
+
+// 商品规格列表
+message GoodsSizeList {
+  // 商品规格
+  repeated GoodsSize GoodsSizeList= 1 [(gogoproto.moretags) = 'form:"goodsSizeList"',(gogoproto.jsontag)='goodsSizeList'];
+}
+
+// 商品属性
+message GoodsSpec {
+  // 商品id
+  int32 goods_id =1 [(gogoproto.moretags) = 'form:"goods_id"',(gogoproto.jsontag)='goods_id'];
+  // 商品属性id
+  int32 id = 2 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 商品规格名称
+  string name = 3 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name'];
+  // 商品属性图片
+  string pic_url = 4 [(gogoproto.moretags) = 'form:"pic_url"',(gogoproto.jsontag)='pic_url'];
+  // 商品规格id
+  int32 specification_id = 5 [(gogoproto.moretags) = 'form:"specification_id"',(gogoproto.jsontag)='specification_id'];
+  // 商品属性名称
+  string value = 6 [(gogoproto.moretags) = 'form:"value"',(gogoproto.jsontag)='value'];
+}
+
+// 商品售卖信息Req
+message GoodsSellReq{
+  // 商品 id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+}
+
+// 商品轮播图
+message GoodsGallery{
+  // id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 商品id
+  int32 goods_id = 2 [(gogoproto.moretags) = 'form:"goods_id"',(gogoproto.jsontag)='goods_id'];
+  // 轮播图图片
+  string img_url = 3 [(gogoproto.moretags) = 'form:"img_url"',(gogoproto.jsontag)='img_url'];
+  // 轮播描述
+  string img_desc = 4 [(gogoproto.moretags) = 'form:"img_desc"',(gogoproto.jsontag)='img_desc'];
+}
+
+// 轮播图列表
+message GoodsGalleryList {
+   // 商品规格描述列表
+   repeated GoodsGallery goodsGallery = 1 [(gogoproto.moretags) = 'form:"goodsGallery"',(gogoproto.jsontag)='goodsGallery'];
+}
+
+
+// 商品特点
+message Attribute {
+  // 特点标签
+  string name = 1 [(gogoproto.moretags) = 'form:"name"',(gogoproto.jsontag)='name'];
+  // 特点详情
+  string value = 2 [(gogoproto.moretags) = 'form:"value"',(gogoproto.jsontag)='value'];
+}
+
+// 商品特点列表
+message AttributeList {
+  // 商品特点列表
+  repeated Attribute attributeList = 1 [(gogoproto.moretags) = 'form:"attributeList"',(gogoproto.jsontag)='attributeList'];
+}
+
+// 商品常见疑问
+message GoodsIssue {
+  // id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 商品id
+  int32 goods_id = 2 [(gogoproto.moretags) = 'form:"goods_id"',(gogoproto.jsontag)='goods_id'];
+  // 商品常见疑问
+  int32 question = 3 [(gogoproto.moretags) = 'form:"question"',(gogoproto.jsontag)='question'];
+  // 疑问解答
+  int32 answer = 4 [(gogoproto.moretags) = 'form:"answer"',(gogoproto.jsontag)='answer'];
+}
+
+// 商品疑问列表
+message GoodsIssueList{
+  // 商品疑问列表
+  repeated GoodsIssue goodsIssue = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+}
+
+// 商品产品信息
+message Product {
+  // id
+  int32 id = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  // 商品id
+  int32 goods_id = 2 [(gogoproto.moretags) = 'form:"goods_id"',(gogoproto.jsontag)='goods_id'];
+  // 商品组合属性
+  string goods_specification_ids = 3 [(gogoproto.moretags) = 'form:"goods_specification_ids"',(gogoproto.jsontag)='goods_specification_ids'];
+  // 产品库存
+  int32 goods_number = 4 [(gogoproto.moretags) = 'form:"goods_number"',(gogoproto.jsontag)='goods_number'];
+  // 产品价格
+  double retail_price = 5 [(gogoproto.moretags) = 'form:"retail_price"',(gogoproto.jsontag)='retail_price'];
+}
+
+// 商品产品列表
+message GoodsProductList {
+  // 产品列表
+  repeated Product productList = 1 [(gogoproto.moretags) = 'form:"productList"',(gogoproto.jsontag)='productList'];
+} 

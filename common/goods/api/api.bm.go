@@ -21,6 +21,11 @@ var PathGoodsGetBrandDetail = "/brand"
 var PathGoodsGetBrandList = "/brand/list"
 var PathGoodsGetCategoryList = "/category/list"
 var PathGoodsGetCategory = "/category"
+var PathGoodsGetGoodsSize = "/goods/sizeList"
+var PathGoodsGetGoodsGallery = "/goods/gallery"
+var PathGoodsGetGoodsAttribute = "/goods/attribute"
+var PathGoodsGetGoodsIssueList = "/goods/issue"
+var PathGoodsGetGoodsProductList = "/goods/product"
 
 // GoodsBMServer is the server API for Goods service.
 type GoodsBMServer interface {
@@ -41,6 +46,21 @@ type GoodsBMServer interface {
 
 	// 获取商品分类详情
 	GetCategory(ctx context.Context, req *CategoryReq) (resp *CategoryRes, err error)
+
+	// 获取商品可选规格
+	GetGoodsSize(ctx context.Context, req *GoodsDetailReq) (resp *GoodsSizeList, err error)
+
+	// 获取商品轮播图
+	GetGoodsGallery(ctx context.Context, req *GoodsDetailReq) (resp *GoodsGalleryList, err error)
+
+	// 获取商品特点
+	GetGoodsAttribute(ctx context.Context, req *GoodsDetailReq) (resp *AttributeList, err error)
+
+	// 获取商品常见疑问
+	GetGoodsIssueList(ctx context.Context, req *GoodsDetailReq) (resp *GoodsIssueList, err error)
+
+	// 获取商品产品列表
+	GetGoodsProductList(ctx context.Context, req *GoodsDetailReq) (resp *GoodsProductList, err error)
 }
 
 var GoodsSvc GoodsBMServer
@@ -99,6 +119,51 @@ func goodsGetCategory(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func goodsGetGoodsSize(c *bm.Context) {
+	p := new(GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsSize(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetGoodsGallery(c *bm.Context) {
+	p := new(GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsGallery(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetGoodsAttribute(c *bm.Context) {
+	p := new(GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsAttribute(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetGoodsIssueList(c *bm.Context) {
+	p := new(GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsIssueList(c, p)
+	c.JSON(resp, err)
+}
+
+func goodsGetGoodsProductList(c *bm.Context) {
+	p := new(GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetGoodsProductList(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterGoodsBMServer Register the blademaster route
 func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	GoodsSvc = server
@@ -108,4 +173,9 @@ func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	e.GET("/brand/list", goodsGetBrandList)
 	e.GET("/category/list", goodsGetCategoryList)
 	e.GET("/category", goodsGetCategory)
+	e.GET("/goods/sizeList", goodsGetGoodsSize)
+	e.GET("/goods/gallery", goodsGetGoodsGallery)
+	e.GET("/goods/attribute", goodsGetGoodsAttribute)
+	e.GET("/goods/issue", goodsGetGoodsIssueList)
+	e.GET("/goods/product", goodsGetGoodsProductList)
 }

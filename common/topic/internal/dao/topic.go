@@ -11,7 +11,7 @@ func (d *Dao) GetTopicList(page, size int32) (listRes *pb.TopicListRes, err erro
 	var topicList []*pb.TopicRes
 	var count int32
 
-	err = d.db.Table("nideshop_topic").Count(&count).Limit(size).Offset((page - 1) * size).Find(&topicList).Error
+	err = d.db.Table("easymarket_topic").Count(&count).Limit(size).Offset((page - 1) * size).Find(&topicList).Error
 
 	listRes = &pb.TopicListRes{
 		TopicList: topicList,
@@ -25,7 +25,7 @@ func (d *Dao) GetTopicList(page, size int32) (listRes *pb.TopicListRes, err erro
 func (d *Dao) GetTopic(id int32) (topic *pb.TopicRes, err error) {
 	topic = &pb.TopicRes{}
 
-	err = d.db.Table("nideshop_topic").Where("id=?", id).Find(topic).Error
+	err = d.db.Table("easymarket_topic").Where("id=?", id).Find(topic).Error
 	if err == gorm.ErrRecordNotFound {
 		return nil, nil
 	}
@@ -38,7 +38,7 @@ func (d *Dao) GetTopicRelated(id, page, size int32) (listRes *pb.TopicListRes, e
 	var topicList []*pb.TopicRes
 	var count int32
 
-	err = d.db.Table("nideshop_topic").Where("id!=?", id).Count(&count).Limit(size).Offset((page - 1) * size).Find(&topicList).Error
+	err = d.db.Table("easymarket_topic").Where("id!=?", id).Count(&count).Limit(size).Offset((page - 1) * size).Find(&topicList).Error
 
 	listRes = &pb.TopicListRes{
 		TopicList: topicList,
