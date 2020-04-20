@@ -2,7 +2,9 @@ package service
 
 import (
 	"context"
+	"sync"
 
+	pb "easymarket-go-server/app/api"
 	goods "easymarket-go-server/common/goods/api"
 )
 
@@ -40,4 +42,54 @@ func (s *Service) GetCategoryList(ctx context.Context, req *goods.CategoryChildR
 func (s *Service) GetCategory(ctx context.Context, req *goods.CategoryReq) (res *goods.CategoryRes, err error) {
 	res, err = s.dao.GetCategory(ctx, req)
 	return
+}
+
+// GetGoodsSell 获取商品分类详情
+func (s *Service) GetGoodsSell(ctx context.Context, req *goods.GoodsDetailReq) (res *pb.GoodsSellRes, err error) {
+	var wg sync.WaitGroup
+	var sizeListChan = make(chan []*goods.GoodsSize, 1)
+	var galleryChan = make(chan []*goods.GoodsGallery, 1)
+	var attributeChan = make(chan []*goods.Attribute, 1)
+	var productChan = make(chan []*goods.Product, 1)
+	var issueChan = make(chan []*goods.GoodsIssue, 1)
+	wg.Add(5)
+
+	go func() {
+		sizeList, _ := s.dao.GetGoodsSize(ctx, req)
+		sizeListChan <- sizeList.GoodsSizeList
+		wg.Done()
+	}()
+	go func() {
+		gallery, _ := s.dao.GetGoodsGallery(ctx, req)
+		galleryChan <- gallery.GoodsGallery
+		wg.Done()
+	}()
+
+	go func() {
+		attribute, _ := s.dao.GetGoodsAttribute(ctx, req)
+		attributeChan <- attribute.AttributeList
+		wg.Done()
+	}()
+
+	go func() {
+		product, _ := s.dao.GetGoodsProductList(ctx, req)
+		productChan <- product.ProductList
+		wg.Done()
+	}()
+
+	go func() {
+		issue, _ := s.dao.GetGoodsIssueList(ctx, req)
+		issueChan <- issue.GoodsIssue
+		wg.Done()
+	}()
+	wg.Wait()
+	res = &pb.GoodsSellRes{
+		GoodsSize:    <-sizeListChan,
+		GoodsGallery: <-galleryChan,
+		Attribute:    <-attributeChan,
+		ProductList:  <-productChan,
+		Issue:        <-issueChan,
+	}
+
+	return res, err
 }

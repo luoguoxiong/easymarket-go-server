@@ -286,7 +286,7 @@ message GoodsIssue {
 // 商品疑问列表
 message GoodsIssueList{
   // 商品疑问列表
-  repeated GoodsIssue goodsIssue = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  repeated GoodsIssue goodsIssue = 1 [(gogoproto.moretags) = 'form:"goodsIssue"',(gogoproto.jsontag)='goodsIssue'];
 }
 
 // 商品产品信息

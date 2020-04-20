@@ -679,7 +679,7 @@
         ".goods.service.v1.GoodsIssueList": {
             "type": "object",
             "properties": {
-                "id": {
+                "goodsIssue": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/.goods.service.v1.GoodsIssue"

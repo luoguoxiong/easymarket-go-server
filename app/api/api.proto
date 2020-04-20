@@ -67,4 +67,22 @@ service App {
       get: "/app/category"
     };
   }
+  // 获取商品售卖信息
+  rpc GetGoodsSell(goods.service.v1.GoodsDetailReq) returns (GoodsSellRes){
+    option (google.api.http) = {
+      get: "/app/goods/sell"
+    };
+  }
+}
+message GoodsSellRes {
+  // 商品规格
+  repeated goods.service.v1.GoodsSize goodsSize= 1 [(gogoproto.moretags) = 'form:"goodsSize"',(gogoproto.jsontag)='goodsSize'];
+  // 商品轮播图
+  repeated goods.service.v1.GoodsGallery goodsGallery= 2 [(gogoproto.moretags) = 'form:"goodsGallery"',(gogoproto.jsontag)='goodsGallery'];
+   // 商品特点
+  repeated goods.service.v1.Attribute attribute = 3 [(gogoproto.moretags) = 'form:"attribute"',(gogoproto.jsontag)='attribute'];
+   // 商品疑问列表
+   repeated goods.service.v1.GoodsIssue issue = 4 [(gogoproto.moretags) = 'form:"issue"',(gogoproto.jsontag)='issue'];
+   // 产品列表
+  repeated goods.service.v1.Product productList = 5 [(gogoproto.moretags) = 'form:"productList"',(gogoproto.jsontag)='productList'];
 }

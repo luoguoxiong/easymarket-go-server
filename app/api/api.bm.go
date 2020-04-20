@@ -26,6 +26,7 @@ var PathAppGetTopicList = "/app/topic/list"
 var PathAppGetTopicRelated = "/app/topic/related"
 var PathAppGetCategoryList = "/app/category/list"
 var PathAppGetCategory = "/app/category"
+var PathAppGetGoodsSell = "/app/goods/sell"
 
 // AppBMServer is the server API for App service.
 type AppBMServer interface {
@@ -55,6 +56,9 @@ type AppBMServer interface {
 
 	// 获取商品分类详情
 	GetCategory(ctx context.Context, req *goods_service_v1.CategoryReq) (resp *goods_service_v1.CategoryRes, err error)
+
+	// 获取商品售卖信息
+	GetGoodsSell(ctx context.Context, req *goods_service_v1.GoodsDetailReq) (resp *GoodsSellRes, err error)
 }
 
 var AppSvc AppBMServer
@@ -140,6 +144,15 @@ func appGetCategory(c *bm.Context) {
 	c.JSON(resp, err)
 }
 
+func appGetGoodsSell(c *bm.Context) {
+	p := new(goods_service_v1.GoodsDetailReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.GetGoodsSell(c, p)
+	c.JSON(resp, err)
+}
+
 // RegisterAppBMServer Register the blademaster route
 func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	AppSvc = server
@@ -152,4 +165,5 @@ func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	e.GET("/app/topic/related", appGetTopicRelated)
 	e.GET("/app/category/list", appGetCategoryList)
 	e.GET("/app/category", appGetCategory)
+	e.GET("/app/goods/sell", appGetGoodsSell)
 }

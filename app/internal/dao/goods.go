@@ -49,3 +49,33 @@ func (d *Dao) GetCategory(ctx context.Context, req *goods.CategoryReq) (resp *go
 	resp, err = d.goodsClient.GetCategory(ctx, req)
 	return
 }
+
+// GetGoodsSize 获取商品可选规格
+func (d *Dao) GetGoodsSize(ctx context.Context, req *goods.GoodsDetailReq) (resp *goods.GoodsSizeList, err error) {
+	resp, err = d.goodsClient.GetGoodsSize(ctx, req)
+	return resp, err
+}
+
+// GetGoodsGallery 获取商品轮播图
+func (d *Dao) GetGoodsGallery(ctx context.Context, req *goods.GoodsDetailReq) (resp *goods.GoodsGalleryList, err error) {
+	resp, err = d.goodsClient.GetGoodsGallery(ctx, req)
+	return resp, err
+}
+
+// GetGoodsIssueList 获取商品常见疑问
+func (d *Dao) GetGoodsIssueList(ctx context.Context, req *goods.GoodsDetailReq) (resp *goods.GoodsIssueList, err error) {
+	resp, err = d.goodsClient.GetGoodsIssueList(ctx, req)
+	return resp, err
+}
+
+// GetGoodsAttribute 获取商品特点
+func (d *Dao) GetGoodsAttribute(ctx context.Context, req *goods.GoodsDetailReq) (resp *goods.AttributeList, err error) {
+	resp, err = d.goodsClient.GetGoodsAttribute(ctx, req)
+	return resp, err
+}
+
+// GetGoodsProductList 获取商品产品列表
+func (d *Dao) GetGoodsProductList(ctx context.Context, req *goods.GoodsDetailReq) (resp *goods.GoodsProductList, err error) {
+	resp, err = d.goodsClient.GetGoodsProductList(ctx, req)
+	return resp, err
+}

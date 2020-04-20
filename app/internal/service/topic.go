@@ -7,7 +7,7 @@ import (
 
 //GetTopic 获取专题详情
 func (s *Service) GetTopic(ctx context.Context, req *topic.TopicReq) (res *topic.TopicRes, err error) {
-	return
+	return s.dao.GetTopic(ctx, req)
 }
 
 //GetTopicList 获取专题列表
@@ -17,5 +17,5 @@ func (s *Service) GetTopicList(ctx context.Context, req *topic.TopicListReq) (re
 
 // GetTopicRelated 获取相似专题列表
 func (s *Service) GetTopicRelated(ctx context.Context, req *topic.TopicRelatedReq) (res *topic.TopicListRes, err error) {
-	return
+	return s.dao.GetTopicRelated(ctx, req)
 }
