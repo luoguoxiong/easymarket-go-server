@@ -13,12 +13,23 @@ import (
 	"github.com/go-kratos/kratos/pkg/log"
 )
 
+func initLog() {
+	var (
+		dc struct {
+			Log *log.Config
+		}
+	)
+	if err := paladin.Get("log.toml").UnmarshalTOML(&dc); err != nil {
+		panic(err)
+	}
+	log.Init(dc.Log)
+}
 func main() {
 	flag.Parse()
-	log.Init(nil) // debug flag: log.dir={path}
+	paladin.Init()
+	initLog()
 	defer log.Close()
 	log.Info("goods start")
-	paladin.Init()
 	_, closeFunc, err := di.InitApp()
 	if err != nil {
 		panic(err)

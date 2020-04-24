@@ -1,0 +1,8 @@
+
+[Log]
+    stdout = true
+    dir = "./log"
+    fileprefix = "union-gateway"
+    maxlogfile = 20
+    rotatesize = 100000000
+    v = 0

@@ -1,4 +1,5 @@
-# Demo
+# Goods 服务
 
-## 项目简介
-1.
+## 镜像打包前编译
+
+CGO_ENABLED=0 go build .

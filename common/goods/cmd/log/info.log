@@ -1,0 +1,10 @@
+[2020/04/23 18:15:15.645] [INFO] [D:/mygo/src/easymarket-go-server/common/goods/cmd/main.go:33] goods start
+[2020/04/23 18:15:16.812] [INFO] [D:/mygo/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:97] blademaster: start http listen addr: 0.0.0.0:18001
+[2020/04/23 18:15:16.813] [INFO] [D:/mygo/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/rpc/warden/server.go:329] warden: start grpc listen addr: [::]:28001
+[2020/04/23 18:15:37.422] [INFO] [http-access-log] user=no_user params=page=1&size=3 msg=0 err= method=GET timeout_quota=1 path=/goods/list ret=0 ts=0.0319208 traceid= ip=[ stack=<nil> 
+[2020/04/23 18:15:38.280] [INFO] [http-access-log] path=/favicon.ico stack=<nil> timeout_quota=1 user=no_user ret=0 method=GET ip=[ params= msg=0 err= ts=0 traceid= 
+[2020/04/23 18:15:58.071] [INFO] [http-access-log] ip=[ user=no_user params=page=1&size=3 timeout_quota=1 ts=0.040891 method=GET ret=0 stack=<nil> path=/goods/list msg=0 traceid= err= 
+[2020/04/23 18:16:05.757] [INFO] [http-access-log] msg=0 err= method=GET user=no_user params=page=1 ret=0 traceid= ts=0.0169537 stack=<nil> timeout_quota=1 ip=[ path=/goods/list 
+[2020/04/23 20:03:15.374] [INFO] [http-access-log] ret=0 stack=<nil> ts=0.0299156 method=GET msg=0 err= timeout_quota=0.9990078 params=page=1&size=2 user=no_user path=/goods/list traceid= ip=[ 
+[2020/04/23 20:03:18.369] [INFO] [http-access-log] msg=0 err= ip=[ path=/goods/list ret=0 ts=0.0418911 traceid= user=no_user params=page=1&size=2 timeout_quota=1 method=GET stack=<nil> 
+[2020/04/23 20:09:27.799] [INFO] [http-access-log] params=page=1&size=2 stack=<nil> ts=0.0259305 timeout_quota=1 ip=[ ret=0 msg=0 user=no_user traceid= method=GET path=/goods/list err= 

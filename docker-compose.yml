@@ -1,0 +1,9 @@
+version: "2.0"
+
+services:
+  goods:
+    network_mode: host
+    image: goods:latest
+    volumes:
+      - /project/log/easymarket-go-server/goods/log:/app/log
+      - /project/docker/easymarket-go-server/config/goods:/app/configs
