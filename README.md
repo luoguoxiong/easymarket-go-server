@@ -21,3 +21,7 @@ kratos tool protoc --ecode api.proto
 kratos tool protoc --swagger api.proto
 
 kratos tool swagger serve api.swagger.json
+
+<!-- 机器构建镜像钱打包 -->
+
+CGO_ENABLED=0 go build .

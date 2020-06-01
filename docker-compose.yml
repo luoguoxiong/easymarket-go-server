@@ -1,9 +1,26 @@
 version: "2.0"
 
 services:
+  app:
+    network_mode: host
+    image: app:latest
+    volumes:
+      - /project/log/easymarket-go-server/app:/app/log
+      - /project/docker/easymarket-go-server/config/app:/app/configs
+    depends_on:
+      - goods
+      - topic
+
   goods:
     network_mode: host
     image: goods:latest
     volumes:
-      - /project/log/easymarket-go-server/goods/log:/app/log
+      - /project/log/easymarket-go-server/goods:/app/log
       - /project/docker/easymarket-go-server/config/goods:/app/configs
+
+  topic:
+    network_mode: host
+    image: topic:latest
+    volumes:
+      - /project/log/easymarket-go-server/topic:/app/log
+      - /project/docker/easymarket-go-server/config/topic:/app/configs
