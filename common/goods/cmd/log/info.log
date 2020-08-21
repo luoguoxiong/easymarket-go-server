@@ -8,3 +8,22 @@
 [2020/04/23 20:03:15.374] [INFO] [http-access-log] ret=0 stack=<nil> ts=0.0299156 method=GET msg=0 err= timeout_quota=0.9990078 params=page=1&size=2 user=no_user path=/goods/list traceid= ip=[ 
 [2020/04/23 20:03:18.369] [INFO] [http-access-log] msg=0 err= ip=[ path=/goods/list ret=0 ts=0.0418911 traceid= user=no_user params=page=1&size=2 timeout_quota=1 method=GET stack=<nil> 
 [2020/04/23 20:09:27.799] [INFO] [http-access-log] params=page=1&size=2 stack=<nil> ts=0.0259305 timeout_quota=1 ip=[ ret=0 msg=0 user=no_user traceid= method=GET path=/goods/list err= 
+[2020/07/31 12:59:47.141] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:32] goods start
+[2020/07/31 12:59:47.187] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:97] blademaster: start http listen addr: 0.0.0.0:18001
+[2020/07/31 12:59:47.187] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/rpc/warden/server.go:329] warden: start grpc listen addr: [::]:28001
+[2020/07/31 13:00:03.125] [INFO] [http-access-log] path=/ ret=0 msg=0 ts=1.002e-05 method=GET user=no_user traceid= stack=<nil> err= ip=[ params= timeout_quota=0.999926527 
+[2020/07/31 13:00:03.299] [INFO] [http-access-log] path=/favicon.ico ret=0 user=no_user traceid= method=GET ip=[ stack=<nil> ts=4.497e-06 params= msg=0 err= timeout_quota=0.999989613 
+[2020/07/31 13:00:08.627] [INFO] [http-access-log] msg=0 ts=3.799e-06 method=GET path=/topic ret=0 params= err= user=no_user stack=<nil> timeout_quota=0.999985032 ip=[ traceid= 
+[2020/07/31 13:00:42.870] [INFO] [http-access-log] msg=0 err= traceid= params= ts=4.154e-06 method=GET ret=0 stack=<nil> timeout_quota=0.999986544 ip=[ user=no_user path=/goodslist 
+[2020/07/31 13:00:54.149] [INFO] [http-access-log] ts=3.63e-06 err= ret=0 timeout_quota=0.999986444 path=/topic ip=[ traceid= method=GET params= msg=0 stack=<nil> user=no_user 
+[2020/07/31 13:01:02.140] [INFO] [http-access-log] params= err= ts=0.018063206 traceid= stack=<nil> method=GET ip=[ user=no_user path=/goods/list msg=0 ret=0 timeout_quota=0.999988356 
+[2020/07/31 13:01:13.636] [INFO] [http-access-log] path=/goods/list err= user=no_user ret=0 stack=<nil> traceid= msg=0 timeout_quota=0.999991536 ts=0.014415384 method=GET ip=[ params=ishot=1 
+[2020/07/31 13:02:28.931] [INFO] [http-access-log] ip=[ ret=0 err= stack=<nil> timeout_quota=0.999990418 ts=0.029143487 method=GET user=no_user path=/goods/list traceid= params=isHot=1 msg=0 
+[2020/07/31 13:04:01.623] [INFO] [http-access-log] err= ts=0.019401225 user=no_user stack=<nil> traceid= method=GET ip=[ path=/goods/list params=ishot=1 ret=0 msg=0 timeout_quota=0.999990105 
+[2020/07/31 13:04:24.036] [INFO] [http-access-log] ret=0 msg=0 method=GET user=no_user stack=<nil> err= ts=0.011407292 timeout_quota=0.999973564 ip=[ path=/goods/list params=ishot=1&page=1&pageSize=2 traceid= 
+[2020/07/31 13:04:36.063] [INFO] [http-access-log] method=GET err= stack=<nil> timeout_quota=0.999989497 path=/goods/list params=ishot=1&page=1&size=2 ret=0 ts=0.017214264 traceid= ip=[ user=no_user msg=0 
+[2020/07/31 13:05:04.115] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:41] get a signal hangup
+[2020/07/31 13:05:04.116] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:41] get a signal hangup
+[2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:41] get a signal terminated
+[2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:45] goods exit
+[2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:105] blademaster: server closed
