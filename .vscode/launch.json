@@ -27,14 +27,14 @@
       "args": ["-conf", "../configs"]
     },
     {
-      "name": "topicServer",
+      "name": "wechatServer",
       "type": "go",
       "request": "launch",
       "mode": "auto",
       "remotePath": "",
-      "port": 18002,
+      "port": 18003,
       "host": "127.0.0.1",
-      "program": "${workspaceRoot}/common/topic/cmd/main.go",
+      "program": "${workspaceRoot}/common/wechat/cmd/main.go",
       "args": ["-conf", "../configs"]
     }
   ]

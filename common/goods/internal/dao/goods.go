@@ -12,6 +12,7 @@ func (d *Dao) GetGoodsList(isHot, isNew, categoryID, page, size int32) (listRes 
 	count := int32(0)
 
 	query := d.db.Table("easymarket_goods")
+
 	if isHot > 0 {
 		query = query.Where("is_hot=?", isHot)
 	}
@@ -37,6 +38,7 @@ func (d *Dao) GetGoodsDetail(id int32) (goods *pb.GoodsRes, err error) {
 	goods = &pb.GoodsRes{}
 
 	err = d.db.Table("easymarket_goods").Where("id=?", id).Find(goods).Error
+
 	if err == gorm.ErrRecordNotFound {
 		return nil, nil
 	}

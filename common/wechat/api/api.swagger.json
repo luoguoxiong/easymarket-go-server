@@ -1,0 +1,147 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "api.proto",
+        "version": ""
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/weChat/getOpenId": {
+            "post": {
+                "summary": "获取微信OpenId",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.OpenIdRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.CodeReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    ".WeChat"
+                ]
+            }
+        },
+        "/weChat/login": {
+            "post": {
+                "summary": "微信小程序登录",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.LoginRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.LoginReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    ".WeChat"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        ".CodeReq": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "微信授权Code"
+                }
+            },
+            "description": "获取微信OpenId请求按时",
+            "required": [
+                "code"
+            ]
+        },
+        ".LoginReq": {
+            "type": "object",
+            "properties": {
+                "nickname": {
+                    "type": "string",
+                    "description": "用户微信名"
+                },
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
+                }
+            },
+            "description": "登录请求参数",
+            "required": [
+                "nickname",
+                "openId"
+            ]
+        },
+        ".LoginRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "用户ID"
+                }
+            },
+            "description": "登录响应"
+        },
+        ".OpenIdRes": {
+            "type": "object",
+            "properties": {
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
+                }
+            },
+            "description": "获取微信OpenId"
+        }
+    }
+}

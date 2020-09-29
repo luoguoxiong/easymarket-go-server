@@ -1,0 +1,55 @@
+// 定义项目 API 的 proto 文件 可以同时描述 gRPC 和 HTTP API
+//  - https://developers.google.com/protocol-buffers/
+syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+option go_package = "api";
+
+option (gogoproto.goproto_getters_all) = false;
+
+service WeChat {
+  // 获取微信OpenId
+  rpc GetWeChatOpenID(CodeReq) returns (OpenIdRes){
+    option (google.api.http) = {
+      post: "/weChat/getOpenId",
+      body: "*"
+    };
+  }
+
+  // 微信小程序登录
+  rpc Login(LoginReq) returns (LoginRes){
+    option (google.api.http) = {
+      post: "/weChat/login",
+      body: "*"
+    };
+  }
+}
+
+// 登录请求参数
+message LoginReq {
+  // 用户微信名
+  string NickName = 1 [(gogoproto.moretags) = 'form:"nickname" validate:"required"',(gogoproto.jsontag)='nickname'];
+  // OpenID
+  string OpenID = 2 [(gogoproto.moretags) =  'form:"openId" validate:"required"',(gogoproto.jsontag)='openId'];
+}
+
+// 登录响应
+message LoginRes {
+  // 用户ID
+  string ID = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+}
+
+// 获取微信OpenId请求按时
+message CodeReq {
+  // 微信授权Code
+  string Code = 1 [(gogoproto.moretags) = 'form:"code" validate:"required"',(gogoproto.jsontag)='code'];
+}
+
+// 获取微信OpenId
+message OpenIdRes{
+  // OpenID
+  string OpenID = 1 [(gogoproto.moretags) = 'form:"openId"',(gogoproto.jsontag)='openId'];
+}

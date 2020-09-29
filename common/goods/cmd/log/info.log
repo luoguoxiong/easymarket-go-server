@@ -27,3 +27,18 @@
 [2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:41] get a signal terminated
 [2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/github/easymarket-go-server/common/goods/cmd/main.go:45] goods exit
 [2020/07/31 18:30:06.310] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:105] blademaster: server closed
+[2020/09/27 16:35:20.684] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/goods/cmd/main.go:32] goods start
+[2020/09/27 16:38:09.760] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/goods/cmd/main.go:32] goods start
+[2020/09/27 16:39:02.791] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/goods/cmd/main.go:32] goods start
+[2020/09/28 14:32:03.417] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/goods/cmd/main.go:32] goods start
+[2020/09/28 14:32:03.480] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/http/blademaster/server.go:97] blademaster: start http listen addr: [::]:18001
+[2020/09/28 14:32:03.480] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/rpc/warden/server.go:329] warden: start grpc listen addr: [::]:28001
+[2020/09/28 14:32:21.504] [INFO] [http-access-log] timeout_quota=0.999971215 params=ishot=1&page=1&pageSize=2 stack=<nil> ret=0 ts=0.02428583 traceid= method=GET path=/goods/list err= user=no_user msg=0 ip=[ 
+[2020/09/28 14:32:21.608] [INFO] [http-access-log] ip=[ msg=0 timeout_quota=0.999988197 traceid= user=no_user path=/favicon.ico stack=<nil> ts=6.411e-06 method=GET params= ret=0 err= 
+[2020/09/28 14:32:35.554] [INFO] [http-access-log] traceid= ip=[ timeout_quota=0.999985503 ts=0.030298418 method=GET path=/goods/list params= user=no_user stack=<nil> err= ret=0 msg=0 
+[2020/09/28 14:33:14.381] [INFO] [http-access-log] ret=0 timeout_quota=0.999967649 ts=0.027542085 method=GET traceid= path=/goods/list params= msg=0 stack=<nil> ip=[ user=no_user err= 
+[2020/09/28 14:33:28.535] [INFO] [http-access-log] user=no_user ret=0 traceid= ip=[ path=/goods/list params=ishot=1&page=1&pageSize=2 timeout_quota=0.99998364 ts=0.027113106 method=GET msg=0 stack=<nil> err= 
+[2020/09/28 14:33:29.331] [INFO] [http-access-log] ret=0 err= ts=0.027400839 traceid= ip=[ user=no_user path=/goods/list stack=<nil> timeout_quota=0.999983853 method=GET params=ishot=1&page=1&pageSize=2 msg=0 
+[2020/09/28 14:34:36.327] [INFO] [http-access-log] method=GET ip=[ err= ts=0.035685756 ret=0 timeout_quota=0.999985817 msg=0 stack=<nil> user=no_user path=/goods/list params=ishot=1&page=1&pageSize=2 traceid= 
+[2020/09/28 14:37:09.402] [INFO] [http-access-log] ret=0 msg=0 path=/goods/list params=ishot=1&page=1&pageSize=2 err= timeout_quota=0.999984647 user=no_user ip=[ stack=<nil> ts=0.027280757 traceid= method=GET 
+[2020/09/28 14:37:31.390] [INFO] [http-access-log] user=no_user msg=0 ts=0.043593948 traceid= path=/goods/list params=ishot=1&page=1&size=2 ret=0 timeout_quota=0.999983889 method=GET ip=[ stack=<nil> err= 
