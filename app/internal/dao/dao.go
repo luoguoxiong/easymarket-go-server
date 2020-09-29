@@ -26,13 +26,13 @@ type Dao struct {
 
 // New new a dao and return.
 func New(r *redis.Redis, db *sql.DB) (d *Dao, cf func(), err error) {
-	g := NewGrpcConfig()
+	// g := NewGrpcConfig()
 	d = &Dao{
 		db:          db,
 		redis:       r,
 		cache:       fanout.New("cache"),
-		goodsClient: g.NewGoodsClient(),
-		topicClient: g.NewTopicClient(),
+		// goodsClient: g.NewGoodsClient(),
+		// topicClient: g.NewTopicClient(),
 	}
 	cf = d.Close
 	return

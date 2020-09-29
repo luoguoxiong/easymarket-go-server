@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"github.com/jinzhu/gorm"
 )
 
 func genHTTPClient() *http.Client {
@@ -53,7 +54,22 @@ func (d *Dao) GetWeChatOpenID(code string) (sessionData *pb.OpenIdRes, err error
 // UserLogin 用户登录
 func (d *Dao) UserLogin(login *pb.LoginReq)(user *pb.LoginRes,err error){
 	user = &pb.LoginRes{}
+
 	err = d.db.Table("easymarket_user").Where("openId=?", login.OpenID).Find(user).Error
-	fmt.Println(user.ID)
- return
+
+	// 如果没有则是新用户
+	if err == gorm.ErrRecordNotFound {
+		err =d.db.Table("easymarket_user").Select("nickname", "openId").Create(&pb.LoginReq{
+			NickName: login.NickName,
+			OpenID:login.OpenID,
+		}).Error
+
+		err = d.db.Table("easymarket_user").Where("openId=?", login.OpenID).Find(user).Error
+
+	}else{
+		err = d.db.Table("easymarket_user").Select("nickname").Updates(login).Error
+		user.NickName = login.NickName
+	}
+
+	return
 }

@@ -31,15 +31,19 @@ service WeChat {
 // 登录请求参数
 message LoginReq {
   // 用户微信名
-  string NickName = 1 [(gogoproto.moretags) = 'form:"nickname" validate:"required"',(gogoproto.jsontag)='nickname'];
+  string NickName = 1 [(gogoproto.moretags) = 'form:"nickname" validate:"required" gorm:"column:nickname"',(gogoproto.jsontag)='nickname'];
   // OpenID
-  string OpenID = 2 [(gogoproto.moretags) =  'form:"openId" validate:"required"',(gogoproto.jsontag)='openId'];
+  string OpenID = 2 [(gogoproto.moretags) =  'form:"openId" validate:"required" gorm:"column:openId"',(gogoproto.jsontag)='openId'];
 }
 
 // 登录响应
 message LoginRes {
   // 用户ID
-  string ID = 1 [(gogoproto.moretags) = 'form:"id"',(gogoproto.jsontag)='id'];
+  int32 ID = 1 [(gogoproto.moretags) = 'form:"id" gorm:"column:id"',(gogoproto.jsontag)='id'];
+  // 用户微信名
+  string NickName = 2 [(gogoproto.moretags) = 'form:"nickname"  gorm:"column:nickname"',(gogoproto.jsontag)='nickname'];
+  // OpenID
+  string OpenID = 3 [(gogoproto.moretags) =  'form:"openId"  gorm:"column:openId"',(gogoproto.jsontag)='openId'];
 }
 
 // 获取微信OpenId请求按时

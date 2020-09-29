@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
 	github.com/coreos/go-systemd v0.0.0-20190719114852-fd7a80b32e1f // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/go-kratos/kratos v0.5.0
 	github.com/go-openapi/runtime v0.19.15 // indirect

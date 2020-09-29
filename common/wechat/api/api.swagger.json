@@ -127,8 +127,16 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string",
+                    "type": "integer",
                     "description": "用户ID"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户微信名"
+                },
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
                 }
             },
             "description": "登录响应"

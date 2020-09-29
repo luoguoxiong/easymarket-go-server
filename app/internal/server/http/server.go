@@ -2,10 +2,9 @@ package http
 
 import (
 	pb "easymarket-go-server/app/api"
-	"easymarket-go-server/app/internal/model"
-
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
+	"easymarket-go-server/app/internal/server/middleware"
 )
 
 var svc pb.AppServer
@@ -23,31 +22,12 @@ func New(s pb.AppServer) (engine *bm.Engine, err error) {
 		return
 	}
 	svc = s
+	// token校验
 	engine = bm.DefaultServer(&cfg)
-	initRouter(engine)
-	initBmRouter(engine, s)
+
+	engine.UseFunc(middleware.TokenValidate)
+	
+	pb.RegisterAppBMServer(engine, s)
 	err = engine.Start()
 	return
-}
-
-func initBmRouter(e *bm.Engine, s pb.AppServer) {
-	// e.UseFunc(func(c *bm.Context) {
-	// 	fmt.Println("232")
-	// })
-	pb.RegisterAppBMServer(e, s)
-}
-
-func initRouter(e *bm.Engine) {
-	g := e.Group("/app")
-	{
-		g.GET("/start", howToStart)
-	}
-}
-
-// example for http request handler.
-func howToStart(c *bm.Context) {
-	k := &model.Kratos{
-		Hello: "Golang 大法好 !!!",
-	}
-	c.JSON(k, nil)
 }
