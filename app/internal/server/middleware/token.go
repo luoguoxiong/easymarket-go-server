@@ -1,58 +1,40 @@
 package middleware
 
 import (
-	"fmt"
-	jwt "github.com/dgrijalva/jwt-go"
+	"easymarket-go-server/app/api"
+	"easymarket-go-server/app/internal/service"
+	"easymarket-go-server/libary"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 	"time"
 )
 
-const secret = "secret"
+// TokenValidate token校验
+func TokenValidate(s *service.Service) func(ctx *bm.Context) {
+	return func(ctx *bm.Context) {
+		token := ctx.Request.Header.Get("token")
+		if token != "" {
 
-type jwtCustomClaims struct {
-	jwt.StandardClaims
-	UserID int32 `json:"userId"`
-}
+			tokenData, err := libary.ParseToken(token)
+			if err != nil {
+				ctx.JSON(nil, api.TokenIsError)
+				ctx.Abort()
+				return
+			}
 
-// TokenValidate 用户token校验
-func TokenValidate(ctx *bm.Context) {
-	Authorization := ctx.Request.Header.Get("Authorization")
-	str, _ := GenerateToken()
-	fmt.Println(str)
-	// fmt.Println(Authorization)
-	claims, _ := ParseToken(Authorization)
+			now := time.Now().Unix()
+			if now >= tokenData.Exp {
+				ctx.JSON(nil, api.TokenTimeOut)
+				ctx.Abort()
+				return
+			}
 
-	startTime := int64(claims.(jwt.MapClaims)["exp"].(float64))
-
-	now := time.Now().Unix()
-
-	if now >= startTime {
-		fmt.Println("超时")
+			oldToken := s.GetTokenByUserID(tokenData.UserID)
+			if token != oldToken {
+				ctx.JSON(nil, api.TokenIsNew)
+				ctx.Abort()
+				return
+			}
+		}
+		ctx.Next()
 	}
-
-	fmt.Println(claims)
-
-	ctx.Next()
-}
-
-// GenerateToken 生产token
-func GenerateToken() (string, error) {
-	claims := &jwtCustomClaims{
-		jwt.StandardClaims{
-			ExpiresAt: int64(time.Now().Add(time.Minute * 1).Unix()),
-		},
-		173,
-	}
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte(secret))
-}
-
-// ParseToken /
-func ParseToken(tokenSrt string) (claims jwt.Claims, err error) {
-	var token *jwt.Token
-	token, err = jwt.Parse(tokenSrt, func(*jwt.Token) (interface{}, error) {
-		return secret, nil
-	})
-	claims = token.Claims
-	return
 }

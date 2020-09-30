@@ -12,6 +12,7 @@ require (
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/go-openapi/validate v0.19.8 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
+	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-swagger/go-swagger v0.23.0 // indirect
 	github.com/gobuffalo/envy v1.9.0 // indirect

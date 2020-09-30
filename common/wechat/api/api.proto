@@ -5,9 +5,8 @@ syntax = "proto3";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
-
+package wechat.service.v1;
 option go_package = "api";
-
 option (gogoproto.goproto_getters_all) = false;
 
 service WeChat {
@@ -44,6 +43,8 @@ message LoginRes {
   string NickName = 2 [(gogoproto.moretags) = 'form:"nickname"  gorm:"column:nickname"',(gogoproto.jsontag)='nickname'];
   // OpenID
   string OpenID = 3 [(gogoproto.moretags) =  'form:"openId"  gorm:"column:openId"',(gogoproto.jsontag)='openId'];
+  // Token
+  string Token = 4 [(gogoproto.moretags) =  'form:"token"',(gogoproto.jsontag)='token'];
 }
 
 // 获取微信OpenId请求按时

@@ -2,13 +2,16 @@ package dao
 
 import (
 	pb "easymarket-go-server/common/wechat/api"
+	"easymarket-go-server/common/wechat/constvariable"
+	"easymarket-go-server/libary"
 	"encoding/json"
 	"fmt"
 	"github.com/go-kratos/kratos/pkg/log"
+	"github.com/jinzhu/gorm"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"time"
-	"github.com/jinzhu/gorm"
 )
 
 func genHTTPClient() *http.Client {
@@ -52,24 +55,30 @@ func (d *Dao) GetWeChatOpenID(code string) (sessionData *pb.OpenIdRes, err error
 }
 
 // UserLogin 用户登录
-func (d *Dao) UserLogin(login *pb.LoginReq)(user *pb.LoginRes,err error){
+func (d *Dao) UserLogin(login *pb.LoginReq) (user *pb.LoginRes, err error) {
 	user = &pb.LoginRes{}
-
 	err = d.db.Table("easymarket_user").Where("openId=?", login.OpenID).Find(user).Error
-
 	// 如果没有则是新用户
 	if err == gorm.ErrRecordNotFound {
-		err =d.db.Table("easymarket_user").Select("nickname", "openId").Create(&pb.LoginReq{
+		err = d.db.Table("easymarket_user").Select("nickname", "openId").Create(&pb.LoginReq{
 			NickName: login.NickName,
-			OpenID:login.OpenID,
+			OpenID:   login.OpenID,
 		}).Error
-
 		err = d.db.Table("easymarket_user").Where("openId=?", login.OpenID).Find(user).Error
-
-	}else{
+	} else {
 		err = d.db.Table("easymarket_user").Select("nickname").Updates(login).Error
 		user.NickName = login.NickName
 	}
+	var token string
+	token, err = libary.GenerateToken(int(user.ID), constvariable.TOKENTIMEOUT)
 
+	user.Token = token
+
+	key := fmt.Sprintf("TOKEN_%s", strconv.Itoa(int(user.ID)))
+
+	err = d.redis.Set(key, token, constvariable.TOKENTIMEOUT).Err()
+	if err != nil {
+		return nil, err
+	}
 	return
 }

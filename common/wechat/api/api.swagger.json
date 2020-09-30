@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "api.proto",
-        "version": ""
+        "version": "1"
     },
     "schemes": [
         "http",
@@ -32,7 +32,7 @@
                                     "type": "string"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/.OpenIdRes"
+                                    "$ref": "#/definitions/.wechat.service.v1.OpenIdRes"
                                 }
                             }
                         }
@@ -44,12 +44,12 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/.CodeReq"
+                            "$ref": "#/definitions/.wechat.service.v1.CodeReq"
                         }
                     }
                 ],
                 "tags": [
-                    ".WeChat"
+                    "wechat.service.v1.WeChat"
                 ]
             }
         },
@@ -69,7 +69,7 @@
                                     "type": "string"
                                 },
                                 "data": {
-                                    "$ref": "#/definitions/.LoginRes"
+                                    "$ref": "#/definitions/.wechat.service.v1.LoginRes"
                                 }
                             }
                         }
@@ -81,18 +81,18 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/.LoginReq"
+                            "$ref": "#/definitions/.wechat.service.v1.LoginReq"
                         }
                     }
                 ],
                 "tags": [
-                    ".WeChat"
+                    "wechat.service.v1.WeChat"
                 ]
             }
         }
     },
     "definitions": {
-        ".CodeReq": {
+        ".wechat.service.v1.CodeReq": {
             "type": "object",
             "properties": {
                 "code": {
@@ -105,7 +105,7 @@
                 "code"
             ]
         },
-        ".LoginReq": {
+        ".wechat.service.v1.LoginReq": {
             "type": "object",
             "properties": {
                 "nickname": {
@@ -123,7 +123,7 @@
                 "openId"
             ]
         },
-        ".LoginRes": {
+        ".wechat.service.v1.LoginRes": {
             "type": "object",
             "properties": {
                 "id": {
@@ -137,11 +137,15 @@
                 "openId": {
                     "type": "string",
                     "description": "OpenID"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Token"
                 }
             },
             "description": "登录响应"
         },
-        ".OpenIdRes": {
+        ".wechat.service.v1.OpenIdRes": {
             "type": "object",
             "properties": {
                 "openId": {

@@ -3,42 +3,42 @@ package dao
 import (
 	goods "easymarket-go-server/common/goods/api"
 	topic "easymarket-go-server/common/topic/api"
-
-	"github.com/go-kratos/kratos/pkg/cache/redis"
-	"github.com/go-kratos/kratos/pkg/database/sql"
-	"github.com/go-kratos/kratos/pkg/sync/pipeline/fanout"
-
+	wechat "easymarket-go-server/common/wechat/api"
+	"easymarket-go-server/libary"
+	gRedis "github.com/go-redis/redis"
 	"github.com/google/wire"
+	"github.com/jinzhu/gorm"
 )
 
 // Provider ...
-var Provider = wire.NewSet(New, NewRedis, NewDB)
+var Provider = wire.NewSet(New)
 
 // Dao dao.
 type Dao struct {
-	db          *sql.DB
-	redis       *redis.Redis
-	cache       *fanout.Fanout
-	demoExpire  int32
-	goodsClient goods.GoodsClient
-	topicClient topic.TopicClient
+	db           *gorm.DB
+	redis        *gRedis.Client
+	goodsClient  goods.GoodsClient
+	topicClient  topic.TopicClient
+	wechatClient wechat.WeChatClient
 }
 
 // New new a dao and return.
-func New(r *redis.Redis, db *sql.DB) (d *Dao, cf func(), err error) {
-	// g := NewGrpcConfig()
+func New() (d *Dao, err error) {
+	db := libary.MysqlInit("mysql.toml")
+	redis := libary.RedisInit("redis.toml")
+	grpc := NewGrpcConfig()
+
 	d = &Dao{
-		db:          db,
-		redis:       r,
-		cache:       fanout.New("cache"),
-		// goodsClient: g.NewGoodsClient(),
+		db:           db,
+		redis:        redis,
+		wechatClient: grpc.NewWechatClient(),
 		// topicClient: g.NewTopicClient(),
 	}
-	cf = d.Close
 	return
 }
 
 // Close close the resource.
 func (d *Dao) Close() {
-	d.cache.Close()
+	d.db.Close()
+	d.redis.Close()
 }

@@ -1,11 +1,10 @@
 package dao
 
 import (
+	"context"
 	goods "easymarket-go-server/common/goods/api"
 	topic "easymarket-go-server/common/topic/api"
-
-	"context"
-
+	wechat "easymarket-go-server/common/wechat/api"
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
 	xtime "github.com/go-kratos/kratos/pkg/time"
@@ -68,4 +67,10 @@ func (g *GrpcServiceConfig) NewGoodsClient() goods.GoodsClient {
 func (g *GrpcServiceConfig) NewTopicClient() topic.TopicClient {
 	c, _ := setConfig(g, "topic-service")
 	return topic.NewTopicClient(c)
+}
+
+// NewWechatClient 实例化topic-grpc服务客户端
+func (g *GrpcServiceConfig) NewWechatClient() wechat.WeChatClient {
+	c, _ := setConfig(g, "wechat-service")
+	return wechat.NewWeChatClient(c)
 }

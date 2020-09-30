@@ -431,6 +431,80 @@
                     "app.service.v1.App"
                 ]
             }
+        },
+        "/app/weChat/getOpenId": {
+            "post": {
+                "summary": "微信小程序登录",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.wechat.service.v1.OpenIdRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.wechat.service.v1.CodeReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
+        },
+        "/app/weChat/login": {
+            "post": {
+                "summary": "微信小程序登录",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.wechat.service.v1.LoginRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.wechat.service.v1.LoginReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    "app.service.v1.App"
+                ]
+            }
         }
     },
     "definitions": {
@@ -920,6 +994,65 @@
                 }
             },
             "description": "专题详情"
+        },
+        ".wechat.service.v1.CodeReq": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "微信授权Code"
+                }
+            },
+            "description": "获取微信OpenId请求按时",
+            "required": [
+                "code"
+            ]
+        },
+        ".wechat.service.v1.LoginReq": {
+            "type": "object",
+            "properties": {
+                "nickname": {
+                    "type": "string",
+                    "description": "用户微信名"
+                },
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
+                }
+            },
+            "description": "登录请求参数",
+            "required": [
+                "nickname",
+                "openId"
+            ]
+        },
+        ".wechat.service.v1.LoginRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "用户ID"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户微信名"
+                },
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
+                }
+            },
+            "description": "登录响应"
+        },
+        ".wechat.service.v1.OpenIdRes": {
+            "type": "object",
+            "properties": {
+                "openId": {
+                    "type": "string",
+                    "description": "OpenID"
+                }
+            },
+            "description": "获取微信OpenId"
         }
     }
 }

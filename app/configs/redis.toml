@@ -1,10 +1,11 @@
-[Client]
-	name = "demo"
-	proto = "tcp"
-	addr = "127.0.0.1:6379"
-	idle = 10
-	active = 10
-	dialTimeout = "1s"
-	readTimeout = "1s"
-	writeTimeout = "1s"
-	idleTimeout = "10s"
+[RedisClient]
+	name = "app-service"
+	Addr = "127.0.0.1:6379"
+	Password = ""
+	DB = 0
+	MaxRetries = 3
+	ReadTimeout = 5    
+	WriteTimeout = 5
+	PoolSize = 5
+	MinIdleConns = 5
+	IdleTimeout = 120

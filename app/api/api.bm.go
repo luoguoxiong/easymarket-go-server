@@ -9,14 +9,17 @@ import (
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 	"github.com/go-kratos/kratos/pkg/net/http/blademaster/binding"
 )
-import goods_service_v1 "easymarket-go-server/common/goods/api"
 import topic_service_v1 "easymarket-go-server/common/topic/api"
+import wechat_service_v1 "easymarket-go-server/common/wechat/api"
+import goods_service_v1 "easymarket-go-server/common/goods/api"
 
 // to suppressed 'imported but not used warning'
 var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
+var PathAppWeChatGetOpenID = "/app/weChat/getOpenId"
+var PathAppWeChatLogin = "/app/weChat/login"
 var PathAppGetGoodsList = "/app/goods/list"
 var PathAppGetGoodsDetail = "/app/goods"
 var PathAppGetBrandDetail = "/app/brand"
@@ -30,6 +33,12 @@ var PathAppGetGoodsSell = "/app/goods/sell"
 
 // AppBMServer is the server API for App service.
 type AppBMServer interface {
+	// 微信小程序登录
+	WeChatGetOpenID(ctx context.Context, req *wechat_service_v1.CodeReq) (resp *wechat_service_v1.OpenIdRes, err error)
+
+	// 微信小程序登录
+	WeChatLogin(ctx context.Context, req *wechat_service_v1.LoginReq) (resp *wechat_service_v1.LoginRes, err error)
+
 	// 获取商品列表
 	GetGoodsList(ctx context.Context, req *goods_service_v1.GoodsReq) (resp *goods_service_v1.GoodsListRes, err error)
 
@@ -62,6 +71,24 @@ type AppBMServer interface {
 }
 
 var AppSvc AppBMServer
+
+func appWeChatGetOpenID(c *bm.Context) {
+	p := new(wechat_service_v1.CodeReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.WeChatGetOpenID(c, p)
+	c.JSON(resp, err)
+}
+
+func appWeChatLogin(c *bm.Context) {
+	p := new(wechat_service_v1.LoginReq)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := AppSvc.WeChatLogin(c, p)
+	c.JSON(resp, err)
+}
 
 func appGetGoodsList(c *bm.Context) {
 	p := new(goods_service_v1.GoodsReq)
@@ -156,6 +183,8 @@ func appGetGoodsSell(c *bm.Context) {
 // RegisterAppBMServer Register the blademaster route
 func RegisterAppBMServer(e *bm.Engine, server AppBMServer) {
 	AppSvc = server
+	e.POST("/app/weChat/getOpenId", appWeChatGetOpenID)
+	e.POST("/app/weChat/login", appWeChatLogin)
 	e.GET("/app/goods/list", appGetGoodsList)
 	e.GET("/app/goods", appGetGoodsDetail)
 	e.GET("/app/brand", appGetBrandDetail)
