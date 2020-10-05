@@ -1,12 +1,12 @@
-version: "2.0"
+version: "3.0"
 
 services:
   app:
     network_mode: host
     image: app:latest
-    volumes:
-      - /project/log/easymarket-go-server/app:/app/log
-      - /project/docker/easymarket-go-server/config/app:/app/configs
+    # volumes:
+    #  - /project/log/easymarket-go-server/app:/app/log
+    #  - /project/docker/easymarket-go-server/config/app:/app/configs
     depends_on:
       - goods
       - topic
@@ -14,13 +14,20 @@ services:
   goods:
     network_mode: host
     image: goods:latest
-    volumes:
-      - /project/log/easymarket-go-server/goods:/app/log
-      - /project/docker/easymarket-go-server/config/goods:/app/configs
+    # volumes:
+     # - /project/log/easymarket-go-server/goods:/app/log
+     # - /project/docker/easymarket-go-server/config/goods:/app/configs
 
   topic:
     network_mode: host
     image: topic:latest
-    volumes:
-      - /project/log/easymarket-go-server/topic:/app/log
-      - /project/docker/easymarket-go-server/config/topic:/app/configs
+    # volumes:
+     # - /project/log/easymarket-go-server/topic:/app/log
+     # - /project/docker/easymarket-go-server/config/topic:/app/configs
+
+  wechat:
+    network_mode: host
+    image: easy-market-wechat:latest
+    # volumes:
+      # - /project/log/easymarket-go-server/topic:/app/log
+      # - /project/docker/easymarket-go-server/config/topic:/app/configs
