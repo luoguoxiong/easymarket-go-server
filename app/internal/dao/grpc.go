@@ -69,7 +69,7 @@ func (g *GrpcServiceConfig) NewTopicClient() topic.TopicClient {
 	return topic.NewTopicClient(c)
 }
 
-// NewWechatClient 实例化topic-grpc服务客户端
+// NewWechatClient 实例化wechat-grpc服务客户端
 func (g *GrpcServiceConfig) NewWechatClient() wechat.WeChatClient {
 	c, _ := setConfig(g, "wechat-service")
 	return wechat.NewWeChatClient(c)
