@@ -24,7 +24,11 @@ func (d *Dao) GetGoodsList(isHot, isNew, categoryID, page, size int32) (listRes 
 		query = query.Where("category_id=?", categoryID)
 	}
 
-	err = query.Count(&count).Limit(size).Offset((page - 1) * size).Find(&goodsList).Error
+	if page != 0 && size != 0 {
+		err = query.Count(&count).Limit(size).Offset((page - 1) * size).Find(&goodsList).Error
+	} else {
+		err = query.Count(&count).Find(&goodsList).Error
+	}
 
 	listRes = &pb.GoodsListRes{
 		GoodsList: goodsList,

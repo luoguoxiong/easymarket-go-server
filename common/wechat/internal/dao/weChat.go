@@ -74,7 +74,7 @@ func (d *Dao) UserLogin(login *pb.LoginReq) (user *pb.LoginRes, err error) {
 
 	user.Token = token
 
-	key := fmt.Sprintf("TOKEN_%s", strconv.Itoa(int(user.ID)))
+	key := fmt.Sprintf("token:user:%s", strconv.Itoa(int(user.ID)))
 
 	err = d.redis.Set(key, token, constvariable.TOKENTIMEOUT).Err()
 	if err != nil {

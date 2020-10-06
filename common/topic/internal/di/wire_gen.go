@@ -15,45 +15,30 @@ import (
 // Injectors from wire.go:
 
 func InitApp() (*App, func(), error) {
-	db, cleanup, err := dao.NewDB()
+	daoDao, err := dao.New()
 	if err != nil {
 		return nil, nil, err
 	}
-	daoDao, cleanup2, err := dao.New(db)
+	serviceService, cleanup, err := service.New(daoDao)
 	if err != nil {
-		cleanup()
-		return nil, nil, err
-	}
-	serviceService, cleanup3, err := service.New(daoDao)
-	if err != nil {
-		cleanup2()
-		cleanup()
 		return nil, nil, err
 	}
 	engine, err := http.New(serviceService)
 	if err != nil {
-		cleanup3()
-		cleanup2()
 		cleanup()
 		return nil, nil, err
 	}
 	server, err := grpc.New(serviceService)
 	if err != nil {
-		cleanup3()
-		cleanup2()
 		cleanup()
 		return nil, nil, err
 	}
-	app, cleanup4, err := NewApp(serviceService, engine, server)
+	app, cleanup2, err := NewApp(serviceService, engine, server)
 	if err != nil {
-		cleanup3()
-		cleanup2()
 		cleanup()
 		return nil, nil, err
 	}
 	return app, func() {
-		cleanup4()
-		cleanup3()
 		cleanup2()
 		cleanup()
 	}, nil

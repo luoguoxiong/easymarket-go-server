@@ -1,4 +1,4 @@
-[GoodsDB]
+[MysqlDb]
     dsn = "lianjiabang:123456@tcp(39.108.84.221)/easymarket2?charset=utf8&parseTime=True&loc=Local"
     debug = true
 	maxOpenConns = 20

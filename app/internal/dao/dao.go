@@ -32,7 +32,8 @@ func New() (d *Dao, err error) {
 		db:           db,
 		redis:        redis,
 		wechatClient: grpc.NewWechatClient(),
-		// topicClient: g.NewTopicClient(),
+		topicClient:  grpc.NewTopicClient(),
+		goodsClient:  grpc.NewGoodsClient(),
 	}
 	return
 }
