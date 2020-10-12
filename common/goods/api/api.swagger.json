@@ -16,6 +16,33 @@
         "application/json"
     ],
     "paths": {
+        "/adsSwiper": {
+            "get": {
+                "summary": "获取首页广告轮播图",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.goods.service.v1.AdsSwiper"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "goods.service.v1.Goods"
+                ]
+            }
+        },
         "/brand": {
             "get": {
                 "summary": "获取制造商详情",
@@ -449,6 +476,19 @@
         }
     },
     "definitions": {
+        ".goods.service.v1.AdsSwiper": {
+            "type": "object",
+            "properties": {
+                "Banner": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/.goods.service.v1.SwiperItem"
+                    },
+                    "description": "广告轮播图"
+                }
+            },
+            "description": "广告轮播图"
+        },
         ".goods.service.v1.Attribute": {
             "type": "object",
             "properties": {
@@ -870,6 +910,20 @@
                 }
             },
             "description": "商品产品信息"
+        },
+        ".goods.service.v1.SwiperItem": {
+            "type": "object",
+            "properties": {
+                "imageUrl": {
+                    "type": "string",
+                    "description": "图片地址"
+                }
+            }
+        },
+        ".google.protobuf.Empty": {
+            "type": "object",
+            "properties": {},
+            "description": "A generic empty message that you can re-use to avoid defining duplicated\n empty messages in your APIs. A typical example is to use it as the request\n or the response type of an API method. For instance:\n\n     service Foo {\n       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n     }\n\n The JSON representation for `Empty` is empty JSON object `{}`."
         }
     }
 }

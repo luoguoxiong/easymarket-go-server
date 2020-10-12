@@ -9,12 +9,14 @@ import (
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 	"github.com/go-kratos/kratos/pkg/net/http/blademaster/binding"
 )
+import google_protobuf1 "github.com/golang/protobuf/ptypes/empty"
 
 // to suppressed 'imported but not used warning'
 var _ *bm.Context
 var _ context.Context
 var _ binding.StructValidator
 
+var PathGoodsGetAdsSwiper = "/adsSwiper"
 var PathGoodsGetGoodsDetail = "/goods"
 var PathGoodsGetGoodsList = "/goods/list"
 var PathGoodsGetBrandDetail = "/brand"
@@ -29,6 +31,9 @@ var PathGoodsGetGoodsProductList = "/goods/product"
 
 // GoodsBMServer is the server API for Goods service.
 type GoodsBMServer interface {
+	// 获取首页广告轮播图
+	GetAdsSwiper(ctx context.Context, req *google_protobuf1.Empty) (resp *AdsSwiper, err error)
+
 	// 获取商品详情
 	GetGoodsDetail(ctx context.Context, req *GoodsDetailReq) (resp *GoodsRes, err error)
 
@@ -64,6 +69,15 @@ type GoodsBMServer interface {
 }
 
 var GoodsSvc GoodsBMServer
+
+func goodsGetAdsSwiper(c *bm.Context) {
+	p := new(google_protobuf1.Empty)
+	if err := c.BindWith(p, binding.Default(c.Request.Method, c.Request.Header.Get("Content-Type"))); err != nil {
+		return
+	}
+	resp, err := GoodsSvc.GetAdsSwiper(c, p)
+	c.JSON(resp, err)
+}
 
 func goodsGetGoodsDetail(c *bm.Context) {
 	p := new(GoodsDetailReq)
@@ -167,6 +181,7 @@ func goodsGetGoodsProductList(c *bm.Context) {
 // RegisterGoodsBMServer Register the blademaster route
 func RegisterGoodsBMServer(e *bm.Engine, server GoodsBMServer) {
 	GoodsSvc = server
+	e.GET("/adsSwiper", goodsGetAdsSwiper)
 	e.GET("/goods", goodsGetGoodsDetail)
 	e.GET("/goods/list", goodsGetGoodsList)
 	e.GET("/brand", goodsGetBrandDetail)

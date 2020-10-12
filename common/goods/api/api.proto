@@ -12,6 +12,12 @@ option go_package = "api";
 option (gogoproto.goproto_getters_all) = false;
 
 service Goods {
+  // 获取首页广告轮播图
+  rpc GetAdsSwiper(.google.protobuf.Empty) returns (AdsSwiper){
+    option (google.api.http) = {
+      get: "/adsSwiper"
+    };
+  }
   // 获取商品详情
   rpc GetGoodsDetail(GoodsDetailReq) returns (GoodsRes){
     option (google.api.http) = {
@@ -66,20 +72,29 @@ service Goods {
       get: "/goods/attribute"
     };
   }
-
   // 获取商品常见疑问
   rpc GetGoodsIssueList(GoodsDetailReq) returns (GoodsIssueList){
     option (google.api.http) = {
       get: "/goods/issue"
     };
   }
-
   // 获取商品产品列表
   rpc GetGoodsProductList(GoodsDetailReq) returns (GoodsProductList){
     option (google.api.http) = {
       get: "/goods/product"
     };
   }
+}
+
+// 广告轮播图
+message AdsSwiper{
+   // 广告轮播图
+   repeated SwiperItem Banner = 1 [(gogoproto.moretags) = 'form:"Banner"',(gogoproto.jsontag)='banner'];
+}
+
+message SwiperItem{
+   // 图片地址
+   string ImageUrl = 2 [(gogoproto.moretags) = 'form:"imageUrl"  gorm:"column:image_url"',(gogoproto.jsontag)='imageUrl'];
 }
 
 // 获取子分类列表Req
