@@ -220,3 +220,12 @@
 [2020/10/07 18:29:20.962] [INFO] [http-access-log] user=no_user path=/adsSwiper err= ip=127.0.0.1 ret=0 stack=<nil> ts=0.012715064 traceid= method=GET msg=0 timeout_quota=0.999981922 params= 
 [2020/10/07 18:29:23.032] [INFO] [http-access-log] user=no_user msg=0 stack=<nil> method=GET ip=127.0.0.1 params= ret=0 ts=0.012595973 traceid= path=/adsSwiper err= timeout_quota=0.999977321 
 [2020/10/07 18:30:07.498] [INFO] [http-access-log] params= traceid= ts=0.024104183 user=no_user path=/adsSwiper ret=0 stack=<nil> ip=127.0.0.1 msg=0 err= timeout_quota=0.999981433 method=GET 
+[2020/10/12 18:09:53.998] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/advertisement/cmd/main.go:32] goods start
+[2020/10/12 18:09:54.061] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/http/blademaster/server.go:97] blademaster: start http listen addr: [::]:18004
+[2020/10/12 18:09:54.061] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/rpc/warden/server.go:329] warden: start grpc listen addr: [::]:28004
+[2020/10/12 18:10:19.184] [INFO] [http-access-log] ts=0.000115722 ip=[ ret=0 msg=0 timeout_quota=0.999963611 user=no_user traceid= err= method=GET path=/ params= stack=<nil> 
+[2020/10/12 18:10:19.322] [INFO] [http-access-log] msg=0 err= timeout_quota=0.999979936 traceid= method=GET ret=0 path=/favicon.ico params= stack=<nil> ts=9.379e-06 ip=[ user=no_user 
+[2020/10/12 18:10:31.492] [INFO] [http-access-log] ret=0 timeout_quota=0.999984418 ts=0.329201816 traceid= params= msg=0 stack=<nil> err= ip=[ method=GET user=no_user path=/advertisement/homeSwiper 
+[2020/10/12 19:03:00.497] [INFO] [/Users/peroluo/go/src/easymarket-go-server/common/advertisement/cmd/main.go:32] goods start
+[2020/10/12 19:03:01.695] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/http/blademaster/server.go:97] blademaster: start http listen addr: [::]:18004
+[2020/10/12 19:03:01.695] [INFO] [/Users/peroluo/go/pkg/mod/github.com/go-kratos/kratos@v0.5.0/pkg/net/rpc/warden/server.go:329] warden: start grpc listen addr: [::]:28004

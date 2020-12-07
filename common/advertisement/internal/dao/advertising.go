@@ -1,7 +1,7 @@
 package dao
 
 import (
-	pb "easymarket-go-server/common/goods/api"
+	pb "easymarket-go-server/common/advertisement/api"
 
 	"github.com/jinzhu/gorm"
 )

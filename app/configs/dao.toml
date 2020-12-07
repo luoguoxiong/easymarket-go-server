@@ -11,3 +11,7 @@
         timeout = "600000ms"
         addr = "127.0.0.1:28003"
         maxReceiveMessageSize = 0
+    [servers.advertisement-service]
+        timeout = "600000ms"
+        addr = "127.0.0.1:28003"
+        maxReceiveMessageSize = 0

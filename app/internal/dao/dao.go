@@ -1,6 +1,7 @@
 package dao
 
 import (
+	advertisement "easymarket-go-server/common/advertisement/api"
 	goods "easymarket-go-server/common/goods/api"
 	topic "easymarket-go-server/common/topic/api"
 	wechat "easymarket-go-server/common/wechat/api"
@@ -20,6 +21,7 @@ type Dao struct {
 	goodsClient  goods.GoodsClient
 	topicClient  topic.TopicClient
 	wechatClient wechat.WeChatClient
+	adsClient   advertisement.AdvertisementClient
 }
 
 // New new a dao and return.
@@ -34,6 +36,7 @@ func New() (d *Dao, err error) {
 		wechatClient: grpc.NewWechatClient(),
 		topicClient:  grpc.NewTopicClient(),
 		goodsClient:  grpc.NewGoodsClient(),
+		adsClient:   grpc.NewAdsClient(),
 	}
 	return
 }

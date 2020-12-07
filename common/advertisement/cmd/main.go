@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"time"
 
-	"easymarket-go-server/common/goods/internal/di"
+	"easymarket-go-server/common/advertisement/internal/di"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/log"

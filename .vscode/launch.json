@@ -47,6 +47,17 @@
       "host": "127.0.0.1",
       "program": "${workspaceRoot}/common/wechat/cmd/main.go",
       "args": ["-conf", "../configs"]
+    },
+    {
+      "name": "adsServer",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "remotePath": "",
+      "port": 18004,
+      "host": "127.0.0.1",
+      "program": "${workspaceRoot}/common/advertisement/cmd/main.go",
+      "args": ["-conf", "../configs"]
     }
   ]
 }

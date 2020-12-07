@@ -1,8 +1,8 @@
 package service
 
 import (
-	pb "easymarket-go-server/common/goods/api"
-	"easymarket-go-server/common/goods/internal/dao"
+	pb "easymarket-go-server/common/advertisement/api"
+	"easymarket-go-server/common/advertisement/internal/dao"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
 
@@ -10,7 +10,7 @@ import (
 )
 
 // Provider ...
-var Provider = wire.NewSet(New, wire.Bind(new(pb.GoodsServer), new(*Service)))
+var Provider = wire.NewSet(New, wire.Bind(new(pb.AdvertisementServer), new(*Service)))
 
 // Service service.
 type Service struct {

@@ -5,20 +5,6 @@ syntax = "proto3";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
-package advertisement.service.v1;
-
-option go_package = "api";
-
-option (gogoproto.goproto_getters_all) = false;
-
-service Advertisement {
-  // 获取首页广告轮播图
-  rpc GetAdsSwiper(.google.protobuf.Empty) returns (AdsSwiper){
-    option (google.api.http) = {
-      get: "/advertisement/homeSwiper"
-    };
-  }
-}
 
 // 广告轮播图
 message AdsSwiper{

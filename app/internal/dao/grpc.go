@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+	advertisement "easymarket-go-server/common/advertisement/api"
 	goods "easymarket-go-server/common/goods/api"
 	topic "easymarket-go-server/common/topic/api"
 	wechat "easymarket-go-server/common/wechat/api"
@@ -73,4 +74,10 @@ func (g *GrpcServiceConfig) NewTopicClient() topic.TopicClient {
 func (g *GrpcServiceConfig) NewWechatClient() wechat.WeChatClient {
 	c, _ := setConfig(g, "wechat-service")
 	return wechat.NewWeChatClient(c)
+}
+
+// NewAdsClient 实例化advertisement-grpc服务客户端
+func (g *GrpcServiceConfig) NewAdsClient() advertisement.AdvertisementClient {
+	c, _ := setConfig(g, "advertisement-service")
+	return advertisement.NewAdvertisementClient(c)
 }

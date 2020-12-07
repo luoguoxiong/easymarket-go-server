@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"easymarket-go-server/common/goods/internal/service"
+	"easymarket-go-server/common/advertisement/internal/service"
 
 	"github.com/go-kratos/kratos/pkg/log"
 	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"

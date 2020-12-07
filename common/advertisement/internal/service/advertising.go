@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	pb "easymarket-go-server/common/goods/api"
+	pb "easymarket-go-server/common/advertisement/api"
 	empty "github.com/golang/protobuf/ptypes/empty"
 )
 
