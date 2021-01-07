@@ -89,6 +89,43 @@
                     "wechat.service.v1.WeChat"
                 ]
             }
+        },
+        "/weChat/printPdfTool": {
+            "post": {
+                "summary": "pdf打印工具",
+                "responses": {
+                    "200": {
+                        "description": "A successful response.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/.wechat.service.v1.PdfToolRes"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/.wechat.service.v1.PdfToolReq"
+                        }
+                    }
+                ],
+                "tags": [
+                    "wechat.service.v1.WeChat"
+                ]
+            }
         }
     },
     "definitions": {
@@ -154,6 +191,38 @@
                 }
             },
             "description": "获取微信OpenId"
+        },
+        ".wechat.service.v1.PdfToolReq": {
+            "type": "object",
+            "properties": {
+                "pageLink": {
+                    "type": "string",
+                    "description": "网页链接"
+                },
+                "visableTag": {
+                    "type": "string",
+                    "description": "前端协商的开始打印的标记"
+                },
+                "fileName": {
+                    "type": "string",
+                    "description": "唯一文件名，重复会覆盖"
+                }
+            },
+            "description": "PdfToolReq",
+            "required": [
+                "pageLink",
+                "fileName"
+            ]
+        },
+        ".wechat.service.v1.PdfToolRes": {
+            "type": "object",
+            "properties": {
+                "pdfUrl": {
+                    "type": "string",
+                    "description": "pdf资源地址"
+                }
+            },
+            "description": "PdfToolRes"
         }
     }
 }

@@ -3,7 +3,10 @@ module easymarket-go-server
 go 1.13
 
 require (
+	github.com/aliyun/aliyun-oss-go-sdk v2.1.5+incompatible
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
+	github.com/chromedp/cdproto v0.0.0-20201204063249-be40c824ad18
+	github.com/chromedp/chromedp v0.5.4
 	github.com/coreos/go-systemd v0.0.0-20190719114852-fd7a80b32e1f // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/color v1.9.0 // indirect
@@ -35,7 +38,6 @@ require (
 	go.mongodb.org/mongo-driver v1.3.3 // indirect
 	golang.org/x/crypto v0.0.0-20200406173513-056763e48d71 // indirect
 	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
-	golang.org/x/sys v0.0.0-20200926100807-9d91bd62050c // indirect
 	golang.org/x/tools v0.0.0-20200507050207-a1532b81a28f // indirect
 	google.golang.org/genproto v0.0.0-20200925023002-c2d885f95484
 	google.golang.org/grpc v1.28.1
